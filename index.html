@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muzammil - AI Conversations & Lead Qualification Experts</title>
+    <title>wakilz - AI Conversations & Lead Qualification Experts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,24 +16,27 @@
         }
 
         :root {
-            --primary: #0f172a;
-            --secondary: #1e293b;
-            --accent: #3b82f6;
-            --accent-light: #60a5fa;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --border: #334155;
-            --success: #10b981;
-            --surface: #1a1f35;
-            --surface-light: #252d3d;
+            --primary: #014b3d;
+            --secondary: #000000;
+            --accent: #014b3d;
+            --accent-light: #006b56;
+            --text-primary: #000000;
+            --text-secondary: #4b5563;
+            --border: #e5e7eb;
+            --success: #22c55e;
+            --surface: #ffffff;
+            --surface-light: #f9fafb;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            font-family: 'Inter', sans-serif;
+            background: var(--surface);
+            background-image: radial-gradient(circle at right center, rgba(1, 75, 61, 0.05) 0%, transparent 50%),
+                              radial-gradient(circle at left center, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            letter-spacing: -0.01em;
         }
 
         /* Navigation */
@@ -37,9 +44,9 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
             padding: 1.2rem 0;
             z-index: 1000;
             animation: slideDown 0.6s ease-out;
@@ -50,6 +57,7 @@
                 transform: translateY(-100%);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -67,12 +75,10 @@
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 800;
+            color: #22c55e;
             letter-spacing: -0.5px;
+            text-decoration: none;
         }
 
         .nav-links {
@@ -110,14 +116,14 @@
         }
 
         .cta-button {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 6px;
+            background: #22c55e !important;
+            color: #000000 !important;
+            padding: 0.8rem 1.8rem;
+            border-radius: 0px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
         }
@@ -127,207 +133,168 @@
             box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
         }
 
-        /* Hero Section */
+        /* Founder Hero Section */
         .hero {
-            padding: 140px 2rem 80px;
-            max-width: 1400px;
-            margin: 0 auto;
-            animation: fadeIn 0.8s ease-out 0.2s both;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 2rem 60px;
+            overflow: hidden;
+            background: #000000 !important;
+            color: #ffffff;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 80%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
         }
 
-        .hero-content {
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(34, 197, 94, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(34, 197, 94, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at 30% 50%, black 0%, transparent 60%);
+            -webkit-mask-image: radial-gradient(circle at 30% 50%, black 0%, transparent 60%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.1fr 0.9fr;
             gap: 4rem;
             align-items: center;
-            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .badge-reviews {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            color: #22c55e;
+            font-weight: 600;
+            background: rgba(34, 197, 94, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
+            font-size: 4.2rem;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-            letter-spacing: -1px;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.04em;
         }
 
         .hero-text p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            max-width: 500px;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 600px;
         }
 
         .hero-buttons {
             display: flex;
             gap: 1.5rem;
-            margin-bottom: 3rem;
             flex-wrap: wrap;
         }
 
-        .button-primary {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
+        .btn-split-left {
+            background: #22c55e;
+            color: #000000;
+            padding: 1rem 2.5rem;
+            border-radius: 0px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.05rem;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            display: inline-block;
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
         }
-
-        .button-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
-        }
-
-        .button-secondary {
+        
+        .btn-split-right {
             background: transparent;
-            color: var(--accent-light);
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border-radius: 0px;
             text-decoration: none;
             font-weight: 600;
-            border: 2px solid var(--accent-light);
+            font-size: 1.05rem;
+            border: 1px solid rgba(255,255,255,0.3);
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            display: inline-block;
+            transition: all 0.2s;
+        }
+        
+        .btn-split-left:hover {
+            transform: translateY(-2px);
+            background: #16a34a;
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.6);
+        }
+        
+        .btn-split-right:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #ffffff;
+            transform: translateY(-2px);
         }
 
-        .button-secondary:hover {
-            background: var(--accent-light);
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .hero-image-container {
+        .hero-image-founder {
             position: relative;
             display: flex;
-            align-items: center;
             justify-content: center;
-            height: 500px;
-        }
-
-        .hero-image-wrapper {
-            width: 100%;
-            height: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
-            border: 2px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            animation: imageFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes imageFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-image-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .hero-image-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.05) 100%);
-            color: var(--text-secondary);
-            position: relative;
-            z-index: 1;
-        }
-
-        .image-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.6;
-        }
-
-        .image-text {
-            text-align: center;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-
-        .image-text strong {
-            display: block;
-            color: var(--accent-light);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .hero-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: relative;
+            align-items: flex-end;
             z-index: 2;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 4rem;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+        .hero-image-founder img {
+            width: 100%;
+            height: auto;
+            max-width: 550px;
+            border-radius: 0;
+            filter: contrast(1.15) brightness(1.1);
+            -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+            mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
         }
 
-        .stat {
-            text-align: center;
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            .hero-text {
+                text-align: center;
+            }
+            .hero-text p {
+                margin: 0 auto 2.5rem;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
         }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
 
         /* Services Section */
         .services {
@@ -347,10 +314,9 @@
         .section-header h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--secondary);
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .section-header p {
@@ -368,9 +334,9 @@
         }
 
         .service-card {
-            background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 0px;
             padding: 2.5rem;
             transition: all 0.3s ease;
             position: relative;
@@ -441,7 +407,7 @@
         /* Case Studies Section */
         .case-studies {
             padding: 5rem 2rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--surface-light);
         }
 
         .case-studies-container {
@@ -452,7 +418,7 @@
         .case-study {
             background: var(--surface-light);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 0px;
             padding: 3rem;
             margin-bottom: 2rem;
             display: grid;
@@ -496,7 +462,7 @@
             border-left: 4px solid var(--accent-light);
             padding: 1.5rem;
             margin: 2rem 0;
-            border-radius: 6px;
+            border-radius: 0px;
             font-style: italic;
             color: var(--text-secondary);
         }
@@ -511,7 +477,7 @@
             text-align: center;
             background: rgba(59, 130, 246, 0.05);
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 0px;
             border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
@@ -540,15 +506,15 @@
 
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-top: 3rem;
         }
 
         .tech-card {
-            background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 0px;
             padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
@@ -584,7 +550,7 @@
         /* Testimonials Section */
         .testimonials {
             padding: 5rem 2rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--surface-light);
         }
 
         .testimonials-container {
@@ -599,7 +565,7 @@
         .testimonial {
             background: var(--surface-light);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 0px;
             padding: 2rem;
             transition: all 0.3s ease;
         }
@@ -636,7 +602,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--text-primary);
             font-weight: bold;
             font-size: 1.2rem;
         }
@@ -655,21 +621,23 @@
 
         /* CTA Section */
         .cta-section {
-            padding: 5rem 2rem;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            padding: 6rem 2rem;
+            background: #22c55e;
             text-align: center;
         }
 
         .cta-section h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            color: white;
+            color: #000000;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .cta-section p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: #111111;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -677,7 +645,7 @@
 
         /* Footer */
         footer {
-            background: var(--primary);
+            background: var(--surface);
             padding: 3rem 2rem;
             border-top: 1px solid var(--border);
             margin-top: 5rem;
@@ -782,77 +750,99 @@
             opacity: 1;
             transform: translateY(0);
         }
+    
+        [data-theme="dark"] {
+            --primary: #027a63;
+            --secondary: #ffffff;
+            --accent: #22c55e;
+            --accent-light: #10b981;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border: #333333;
+            --surface: #0a0a0a;
+            --surface-light: #111111;
+        }
+        
+        [data-theme="dark"] nav {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        [data-theme="dark"] .button-secondary {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+            background: rgba(255,255,255,0.05);
+        }
+        
+        [data-theme="dark"] .button-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        [data-theme="dark"] .button-primary,
+        /* [data-theme="dark"] .cta-button, */
+        [data-theme="dark"] .author-avatar {
+            color: #000000;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 1.5rem;
+            transition: transform 0.3s ease;
+            vertical-align: middle;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+            @media (max-width: 768px) {
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">Muzammil AI</div>
+            <div class="logo">wakilz</div>
             <ul class="nav-links">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#case-studies">Case Studies</a></li>
                 <li><a href="#tech">Technologies</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
             </ul>
-            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+            <button class="cta-button"
+                onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
                 Get Started
             </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
+        <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
+        <div class="hero-container">
             <div class="hero-text">
-                <h1>AI Conversations That Convert</h1>
+                <div class="badge-reviews">★★★★★ 50+ successful bots deployed</div>
+                <h1>Lead Generation & Qualification Bots That Skyrocket Sales</h1>
                 <p>
-                    Build intelligent voicebots, chatbots, and lead qualification systems that engage customers 24/7. 
-                    From lead generation to sales automation, I create conversational AI that actually drives results.
+                    Stop losing potential clients after hours. Our intelligent AI agents capture, engage, and qualify leads round the clock, creating an automated cycle of revenue growth while you sleep.
                 </p>
                 <div class="hero-buttons">
-                    <button class="button-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
-                        Book Consultation
+                    <button class="btn-split-left" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                        Book Intro Call &rarr;
                     </button>
-                    <a href="#case-studies" class="button-secondary">See Case Studies</a>
+                    <a href="#case-studies" class="btn-split-right">See Case Studies &rarr;</a>
                 </div>
             </div>
-
-            <div class="hero-image-container">
-                <div class="hero-image-wrapper">
-                    <!-- Replace the placeholder with your actual image -->
-                    <!-- To add your image: rename it to "profile.jpg" and place it in the same folder -->
-                    <!-- Then uncomment the line below and comment out the placeholder -->
-                    <!-- <img src="profile.jpg" alt="Muzammil"> -->
-                    
-                    <div class="hero-image-placeholder">
-                        <div class="image-icon">👤</div>
-                        <div class="image-text">
-                            <strong>Your Photo Here</strong>
-                            Replace the placeholder with your professional image
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stats -->
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-number">50+</div>
-                <div class="stat-label">Chatbots Built</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">98%</div>
-                <div class="stat-label">Client Satisfaction</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">10M+</div>
-                <div class="stat-label">Conversations Handled</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Support Available</div>
+            <div class="hero-image-founder">
+                <img src="founder.jpeg" onerror="this.src='founder.jpg'; this.onerror=function(){this.src='founder.png'}" alt="wakilz Founder - Conversational AI Expert">
             </div>
         </div>
     </section>
@@ -861,7 +851,8 @@
     <section class="services" id="services">
         <div class="section-header">
             <h2>Comprehensive AI Solutions</h2>
-            <p>From lead generation to full sales automation, I provide end-to-end conversational AI services tailored to your business needs.</p>
+            <p>From lead generation to full sales automation, I provide end-to-end conversational AI services tailored
+                to your business needs.</p>
         </div>
 
         <div class="services-container">
@@ -869,7 +860,8 @@
             <div class="service-card fade-in">
                 <span class="service-icon">💬</span>
                 <h3>Lead Generation Chatbots</h3>
-                <p>Intelligent chatbots that engage website visitors, qualify leads, and capture contact information automatically.</p>
+                <p>Intelligent chatbots that engage website visitors, qualify leads, and capture contact information
+                    automatically.</p>
                 <ul class="service-features">
                     <li>Multi-channel integration (Web, WhatsApp, Messenger)</li>
                     <li>Real-time lead scoring</li>
@@ -882,7 +874,8 @@
             <div class="service-card fade-in">
                 <span class="service-icon">🎯</span>
                 <h3>Lead Qualification Systems</h3>
-                <p>Advanced AI systems that qualify leads based on custom criteria, routing only the most valuable prospects to your team.</p>
+                <p>Advanced AI systems that qualify leads based on custom criteria, routing only the most valuable
+                    prospects to your team.</p>
                 <ul class="service-features">
                     <li>Custom qualification rules</li>
                     <li>Intent detection</li>
@@ -895,7 +888,8 @@
             <div class="service-card fade-in">
                 <span class="service-icon">🚀</span>
                 <h3>Sales Automation Bots</h3>
-                <p>Full-featured sales bots that handle discovery calls, demos, objection handling, and meeting scheduling.</p>
+                <p>Full-featured sales bots that handle discovery calls, demos, objection handling, and meeting
+                    scheduling.</p>
                 <ul class="service-features">
                     <li>Sales conversation automation</li>
                     <li>Calendar integration & booking</li>
@@ -908,7 +902,8 @@
             <div class="service-card fade-in">
                 <span class="service-icon">🎤</span>
                 <h3>Voice & Phone Bots</h3>
-                <p>Natural-sounding voice AI agents for inbound/outbound calls, customer support, and appointment booking.</p>
+                <p>Natural-sounding voice AI agents for inbound/outbound calls, customer support, and appointment
+                    booking.</p>
                 <ul class="service-features">
                     <li>Multi-language voice support</li>
                     <li>Human-like conversations</li>
@@ -921,7 +916,8 @@
             <div class="service-card fade-in">
                 <span class="service-icon">🛟</span>
                 <h3>Customer Support Bots</h3>
-                <p>Intelligent support bots that handle common questions, troubleshooting, and escalation to human agents.</p>
+                <p>Intelligent support bots that handle common questions, troubleshooting, and escalation to human
+                    agents.</p>
                 <ul class="service-features">
                     <li>Knowledge base integration</li>
                     <li>Ticket creation & routing</li>
@@ -934,7 +930,8 @@
             <div class="service-card fade-in">
                 <span class="service-icon">📅</span>
                 <h3>Booking & Scheduling Bots</h3>
-                <p>Automated appointment systems that integrate with calendars, handle conflicts, and send reminders.</p>
+                <p>Automated appointment systems that integrate with calendars, handle conflicts, and send reminders.
+                </p>
                 <ul class="service-features">
                     <li>Calendar sync (Google, Outlook)</li>
                     <li>Timezone handling</li>
@@ -953,80 +950,48 @@
         </div>
 
         <div class="case-studies-container">
-            <!-- Case Study 1 -->
+            <!-- Zahimo Studio -->
             <div class="case-study fade-in">
                 <div class="case-study-text">
-                    <h3>Lead Generation for SaaS Company</h3>
-                    <p>A B2B SaaS company struggled with high bounce rates on their website. They needed a way to engage visitors and convert them into qualified leads.</p>
-                    <div class="case-study-quote">
-                        "Within 30 days, we saw a 3x increase in qualified leads. The chatbot qualification was so accurate that our sales team's close rate improved by 25%."
-                    </div>
-                    <p><strong>Result:</strong> Reduced customer acquisition cost while improving lead quality dramatically.</p>
+                    <h3>Zahimo Studio</h3>
+                    <p>Built a lead generation and qualification chatbot for Zahimo Studio, a premium web design agency. The bot engages potential clients, qualifies their projects, and books free consultation calls automatically on their website.</p>
+                    <a href="https://www.zahimo.com/" target="_blank" style="color: var(--primary); font-weight: bold; text-decoration: none; margin-bottom: 2rem; display: inline-block;">Visit Zahimo Studio →</a>
                 </div>
                 <div class="case-study-metrics">
                     <div class="metric">
-                        <div class="metric-value">3x</div>
+                        <div class="metric-value">45%</div>
                         <div class="metric-label">Lead Increase</div>
                     </div>
                     <div class="metric">
-                        <div class="metric-value">25%</div>
-                        <div class="metric-label">Higher Close Rate</div>
+                        <div class="metric-value">3.2x</div>
+                        <div class="metric-label">Conversion Lift</div>
                     </div>
                     <div class="metric">
-                        <div class="metric-value">45%</div>
-                        <div class="metric-label">Lower CAC</div>
+                        <div class="metric-value">24/7</div>
+                        <div class="metric-label">Engagement</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Case Study 2 -->
+            <!-- Daava Group -->
             <div class="case-study fade-in">
                 <div class="case-study-text">
-                    <h3>Clinic Appointment Automation</h3>
-                    <p>A healthcare clinic was overwhelmed with appointment scheduling calls. They needed to reduce administrative burden while improving patient experience.</p>
-                    <div class="case-study-quote">
-                        "The bot handles 85% of our appointment bookings now. Our staff can focus on patient care instead of answering phones all day."
-                    </div>
-                    <p><strong>Result:</strong> Streamlined operations and improved patient satisfaction scores significantly.</p>
+                    <h3>Daava Group</h3>
+                    <p>Developed an intelligent lead qualification bot for Daava Group, a 3D printing & modelling company. The bot qualifies project specifications, estimates timelines, handles client inquiries, and routes high-value opportunities directly to their sales team.</p>
+                    <a href="https://www.daavagroup.in/" target="_blank" style="color: var(--primary); font-weight: bold; text-decoration: none; margin-bottom: 2rem; display: inline-block;">Visit Daava Group →</a>
                 </div>
                 <div class="case-study-metrics">
                     <div class="metric">
-                        <div class="metric-value">85%</div>
-                        <div class="metric-label">Automated Bookings</div>
+                        <div class="metric-value">38%</div>
+                        <div class="metric-label">Lead Quality</div>
                     </div>
                     <div class="metric">
                         <div class="metric-value">60%</div>
-                        <div class="metric-label">Less No-Shows</div>
+                        <div class="metric-label">Time Saved</div>
                     </div>
                     <div class="metric">
-                        <div class="metric-value">9.2/10</div>
-                        <div class="metric-label">Patient Satisfaction</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Case Study 3 -->
-            <div class="case-study fade-in">
-                <div class="case-study-text">
-                    <h3>E-commerce Sales Bot</h3>
-                    <p>An online retailer wanted to provide personalized shopping assistance and reduce cart abandonment through proactive engagement.</p>
-                    <div class="case-study-quote">
-                        "The sales bot's product recommendations increased average order value by 32%. It's like having a personal shopper available 24/7."
-                    </div>
-                    <p><strong>Result:</strong> Significant revenue increase with improved customer experience metrics.</p>
-                </div>
-                <div class="case-study-metrics">
-                    <div class="metric">
-                        <div class="metric-value">32%</div>
-                        <div class="metric-label">Higher AOV</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">18%</div>
-                        <div class="metric-label">Cart Recovery</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">4.8/5</div>
-                        <div class="metric-label">Customer Rating</div>
+                        <div class="metric-value">5.0/5</div>
+                        <div class="metric-label">Rating</div>
                     </div>
                 </div>
             </div>
@@ -1116,7 +1081,8 @@
             <div class="testimonial fade-in">
                 <div class="stars">★★★★★</div>
                 <p>
-                    "Muzammil's expertise in conversational AI is exceptional. The chatbot he built for us reduced our support tickets by 60% in the first month. Highly recommended!"
+                    "wakilz's expertise in conversational AI is exceptional. The chatbot he built for us reduced our
+                    support tickets by 60% in the first month. Highly recommended!"
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">SA</div>
@@ -1130,7 +1096,8 @@
             <div class="testimonial fade-in">
                 <div class="stars">★★★★★</div>
                 <p>
-                    "The lead qualification bot increased our sales team's productivity immediately. We're closing more deals and spending less time on unqualified leads."
+                    "The lead qualification bot increased our sales team's productivity immediately. We're closing more
+                    deals and spending less time on unqualified leads."
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">DP</div>
@@ -1144,7 +1111,8 @@
             <div class="testimonial fade-in">
                 <div class="stars">★★★★★</div>
                 <p>
-                    "The voice bot implementation was seamless. Our appointment no-shows dropped from 25% to 8%. The ROI was undeniable."
+                    "The voice bot implementation was seamless. Our appointment no-shows dropped from 25% to 8%. The ROI
+                    was undeniable."
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">MK</div>
@@ -1158,7 +1126,8 @@
             <div class="testimonial fade-in">
                 <div class="stars">★★★★★</div>
                 <p>
-                    "Outstanding work! The customization and attention to detail were incredible. Muzammil understood our unique needs perfectly."
+                    "Outstanding work! The customization and attention to detail were incredible. wakilz understood
+                    our unique needs perfectly."
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">JC</div>
@@ -1172,7 +1141,8 @@
             <div class="testimonial fade-in">
                 <div class="stars">★★★★★</div>
                 <p>
-                    "The professionalism and technical expertise demonstrated exceeded our expectations. Communication was clear throughout the entire project."
+                    "The professionalism and technical expertise demonstrated exceeded our expectations. Communication
+                    was clear throughout the entire project."
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">RJ</div>
@@ -1186,7 +1156,8 @@
             <div class="testimonial fade-in">
                 <div class="stars">★★★★★</div>
                 <p>
-                    "Working with Muzammil was a game-changer. The bot handles complex conversations that I thought would need human agents."
+                    "Working with wakilz was a game-changer. The bot handles complex conversations that I thought
+                    would need human agents."
                 </p>
                 <div class="testimonial-author">
                     <div class="author-avatar">EL</div>
@@ -1203,7 +1174,8 @@
     <section class="cta-section" id="contact">
         <h2>Ready to Transform Your Business?</h2>
         <p>Let's discuss how conversational AI can automate your sales, support, and lead generation. Schedule a free consultation today.</p>
-        <button class="button-primary" style="background: white; color: var(--accent); border: none;" onclick="window.open('mailto:contact@example.com?subject=AI Consultation Request')">
+        <button class="button-primary" style="background: #000000; color: #ffffff;"
+            onclick="window.open('mailto:contact@example.com?subject=AI Consultation Request')">
             Schedule Free Consultation
         </button>
     </section>
@@ -1242,7 +1214,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Muzammil AI. All rights reserved. | Building the future of conversational intelligence.</p>
+            <p>&copy; 2024 wakilz. All rights reserved. | Building the future of conversational intelligence.</p>
         </div>
     </footer>
 
@@ -1253,7 +1225,7 @@
             rootMargin: '0px 0px -100px 0px'
         };
 
-        const observer = new IntersectionObserver(function(entries) {
+        const observer = new IntersectionObserver(function (entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
@@ -1265,6 +1237,27 @@
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
+
+                // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const root = document.documentElement;
+        
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        root.setAttribute('data-theme', savedTheme);
+        updateToggleButton(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleButton(newTheme);
+        });
+
+        function updateToggleButton(theme) {
+            themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1278,10 +1271,11 @@
         });
 
         // Update CTA button email
-        document.querySelector('.cta-section button').onclick = function() {
+        document.querySelector('.cta-section button').onclick = function () {
             // Replace 'contact@example.com' with your actual email
             window.location.href = 'mailto:your-email@example.com?subject=AI Consultation Request';
         };
     </script>
 </body>
+
 </html>
