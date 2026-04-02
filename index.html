@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muzammil - AI Conversations & Lead Qualification Experts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border: #334155;
+            --success: #10b981;
+            --surface: #1a1f35;
+            --surface-light: #252d3d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+            padding: 1.2rem 0;
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 2rem 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: inline-block;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--accent-light);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid var(--accent-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: inline-block;
+        }
+
+        .button-secondary:hover {
+            background: var(--accent-light);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .hero-image-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 500px;
+        }
+
+        .hero-image-wrapper {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: imageFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes imageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.05) 100%);
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .image-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .image-text {
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .image-text strong {
+            display: block;
+            color: var(--accent-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--surface);
+            margin-top: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-light);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.2);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .service-features li {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Case Studies Section */
+        .case-studies {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .case-studies-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .case-study {
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .case-study:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .case-study:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .case-study:nth-child(even) .case-study-text {
+            order: 2;
+        }
+
+        .case-study:nth-child(even) .case-study-metrics {
+            order: 1;
+        }
+
+        .case-study-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-light);
+        }
+
+        .case-study-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .case-study-quote {
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 4px solid var(--accent-light);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 6px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .case-study-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .metric {
+            text-align: center;
+            background: rgba(59, 130, 246, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Technologies Section */
+        .technologies {
+            padding: 5rem 2rem;
+            background: var(--surface);
+        }
+
+        .tech-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            border-color: var(--accent-light);
+            transform: translateY(-5px);
+        }
+
+        .tech-card h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .tech-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .tech-badge {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .author-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 5rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-section a,
+        .footer-section p {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image-container {
+                height: 350px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+
+            .case-study {
+                grid-template-columns: 1fr;
+            }
+
+            .case-study:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+
+            .case-study:nth-child(even) .case-study-text {
+                order: unset;
+            }
+
+            .case-study:nth-child(even) .case-study-metrics {
+                order: unset;
+            }
+
+            .case-study-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Muzammil AI</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#tech">Technologies</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                Get Started
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>AI Conversations That Convert</h1>
+                <p>
+                    Build intelligent voicebots, chatbots, and lead qualification systems that engage customers 24/7. 
+                    From lead generation to sales automation, I create conversational AI that actually drives results.
+                </p>
+                <div class="hero-buttons">
+                    <button class="button-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                        Book Consultation
+                    </button>
+                    <a href="#case-studies" class="button-secondary">See Case Studies</a>
+                </div>
+            </div>
+
+            <div class="hero-image-container">
+                <div class="hero-image-wrapper">
+                    <!-- Replace the placeholder with your actual image -->
+                    <!-- To add your image: rename it to "profile.jpg" and place it in the same folder -->
+                    <!-- Then uncomment the line below and comment out the placeholder -->
+                    <!-- <img src="profile.jpg" alt="Muzammil"> -->
+                    
+                    <div class="hero-image-placeholder">
+                        <div class="image-icon">👤</div>
+                        <div class="image-text">
+                            <strong>Your Photo Here</strong>
+                            Replace the placeholder with your professional image
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Chatbots Built</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">10M+</div>
+                <div class="stat-label">Conversations Handled</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support Available</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Comprehensive AI Solutions</h2>
+            <p>From lead generation to full sales automation, I provide end-to-end conversational AI services tailored to your business needs.</p>
+        </div>
+
+        <div class="services-container">
+            <!-- Lead Generation Chatbots -->
+            <div class="service-card fade-in">
+                <span class="service-icon">💬</span>
+                <h3>Lead Generation Chatbots</h3>
+                <p>Intelligent chatbots that engage website visitors, qualify leads, and capture contact information automatically.</p>
+                <ul class="service-features">
+                    <li>Multi-channel integration (Web, WhatsApp, Messenger)</li>
+                    <li>Real-time lead scoring</li>
+                    <li>Automated qualification workflows</li>
+                    <li>CRM synchronization</li>
+                </ul>
+            </div>
+
+            <!-- Lead Qualification -->
+            <div class="service-card fade-in">
+                <span class="service-icon">🎯</span>
+                <h3>Lead Qualification Systems</h3>
+                <p>Advanced AI systems that qualify leads based on custom criteria, routing only the most valuable prospects to your team.</p>
+                <ul class="service-features">
+                    <li>Custom qualification rules</li>
+                    <li>Intent detection</li>
+                    <li>Budget & timeline analysis</li>
+                    <li>Smart routing to sales team</li>
+                </ul>
+            </div>
+
+            <!-- Sales Automation -->
+            <div class="service-card fade-in">
+                <span class="service-icon">🚀</span>
+                <h3>Sales Automation Bots</h3>
+                <p>Full-featured sales bots that handle discovery calls, demos, objection handling, and meeting scheduling.</p>
+                <ul class="service-features">
+                    <li>Sales conversation automation</li>
+                    <li>Calendar integration & booking</li>
+                    <li>Follow-up automation</li>
+                    <li>Sales pipeline tracking</li>
+                </ul>
+            </div>
+
+            <!-- Voice AI -->
+            <div class="service-card fade-in">
+                <span class="service-icon">🎤</span>
+                <h3>Voice & Phone Bots</h3>
+                <p>Natural-sounding voice AI agents for inbound/outbound calls, customer support, and appointment booking.</p>
+                <ul class="service-features">
+                    <li>Multi-language voice support</li>
+                    <li>Human-like conversations</li>
+                    <li>Emotion detection</li>
+                    <li>Telephony integration</li>
+                </ul>
+            </div>
+
+            <!-- Customer Support -->
+            <div class="service-card fade-in">
+                <span class="service-icon">🛟</span>
+                <h3>Customer Support Bots</h3>
+                <p>Intelligent support bots that handle common questions, troubleshooting, and escalation to human agents.</p>
+                <ul class="service-features">
+                    <li>Knowledge base integration</li>
+                    <li>Ticket creation & routing</li>
+                    <li>Sentiment analysis</li>
+                    <li>HIPAA/compliance ready</li>
+                </ul>
+            </div>
+
+            <!-- Booking & Scheduling -->
+            <div class="service-card fade-in">
+                <span class="service-icon">📅</span>
+                <h3>Booking & Scheduling Bots</h3>
+                <p>Automated appointment systems that integrate with calendars, handle conflicts, and send reminders.</p>
+                <ul class="service-features">
+                    <li>Calendar sync (Google, Outlook)</li>
+                    <li>Timezone handling</li>
+                    <li>Reminder & confirmation flows</li>
+                    <li>No-show reduction</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="case-studies" id="case-studies">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <h2>Real Results from Real Clients</h2>
+            <p>See how conversational AI transformed businesses across industries.</p>
+        </div>
+
+        <div class="case-studies-container">
+            <!-- Case Study 1 -->
+            <div class="case-study fade-in">
+                <div class="case-study-text">
+                    <h3>Lead Generation for SaaS Company</h3>
+                    <p>A B2B SaaS company struggled with high bounce rates on their website. They needed a way to engage visitors and convert them into qualified leads.</p>
+                    <div class="case-study-quote">
+                        "Within 30 days, we saw a 3x increase in qualified leads. The chatbot qualification was so accurate that our sales team's close rate improved by 25%."
+                    </div>
+                    <p><strong>Result:</strong> Reduced customer acquisition cost while improving lead quality dramatically.</p>
+                </div>
+                <div class="case-study-metrics">
+                    <div class="metric">
+                        <div class="metric-value">3x</div>
+                        <div class="metric-label">Lead Increase</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">25%</div>
+                        <div class="metric-label">Higher Close Rate</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">45%</div>
+                        <div class="metric-label">Lower CAC</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Study 2 -->
+            <div class="case-study fade-in">
+                <div class="case-study-text">
+                    <h3>Clinic Appointment Automation</h3>
+                    <p>A healthcare clinic was overwhelmed with appointment scheduling calls. They needed to reduce administrative burden while improving patient experience.</p>
+                    <div class="case-study-quote">
+                        "The bot handles 85% of our appointment bookings now. Our staff can focus on patient care instead of answering phones all day."
+                    </div>
+                    <p><strong>Result:</strong> Streamlined operations and improved patient satisfaction scores significantly.</p>
+                </div>
+                <div class="case-study-metrics">
+                    <div class="metric">
+                        <div class="metric-value">85%</div>
+                        <div class="metric-label">Automated Bookings</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">60%</div>
+                        <div class="metric-label">Less No-Shows</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">9.2/10</div>
+                        <div class="metric-label">Patient Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Study 3 -->
+            <div class="case-study fade-in">
+                <div class="case-study-text">
+                    <h3>E-commerce Sales Bot</h3>
+                    <p>An online retailer wanted to provide personalized shopping assistance and reduce cart abandonment through proactive engagement.</p>
+                    <div class="case-study-quote">
+                        "The sales bot's product recommendations increased average order value by 32%. It's like having a personal shopper available 24/7."
+                    </div>
+                    <p><strong>Result:</strong> Significant revenue increase with improved customer experience metrics.</p>
+                </div>
+                <div class="case-study-metrics">
+                    <div class="metric">
+                        <div class="metric-value">32%</div>
+                        <div class="metric-label">Higher AOV</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">18%</div>
+                        <div class="metric-label">Cart Recovery</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">4.8/5</div>
+                        <div class="metric-label">Customer Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section class="technologies" id="tech">
+        <div class="tech-container">
+            <div class="section-header">
+                <h2>Technology Stack</h2>
+                <p>Built with the latest and most reliable conversational AI platforms and integrations.</p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-card fade-in">
+                    <h4>Conversational AI Platforms</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">Voiceflow</span>
+                        <span class="tech-badge">Make.com</span>
+                        <span class="tech-badge">n8n</span>
+                        <span class="tech-badge">Zapier</span>
+                    </div>
+                </div>
+
+                <div class="tech-card fade-in">
+                    <h4>Voice & NLP</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">OpenAI API</span>
+                        <span class="tech-badge">Google Cloud NLP</span>
+                        <span class="tech-badge">Twilio</span>
+                        <span class="tech-badge">Azure Speech</span>
+                    </div>
+                </div>
+
+                <div class="tech-card fade-in">
+                    <h4>CRM & Integrations</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">HubSpot</span>
+                        <span class="tech-badge">Salesforce</span>
+                        <span class="tech-badge">Pipedrive</span>
+                        <span class="tech-badge">Custom APIs</span>
+                    </div>
+                </div>
+
+                <div class="tech-card fade-in">
+                    <h4>Messaging Channels</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">WhatsApp</span>
+                        <span class="tech-badge">Messenger</span>
+                        <span class="tech-badge">Instagram DM</span>
+                        <span class="tech-badge">SMS/Twilio</span>
+                    </div>
+                </div>
+
+                <div class="tech-card fade-in">
+                    <h4>Calendar & Booking</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">Google Calendar</span>
+                        <span class="tech-badge">Outlook</span>
+                        <span class="tech-badge">Calendly</span>
+                        <span class="tech-badge">Stripe Payments</span>
+                    </div>
+                </div>
+
+                <div class="tech-card fade-in">
+                    <h4>Analytics & Tracking</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">Mixpanel</span>
+                        <span class="tech-badge">Segment</span>
+                        <span class="tech-badge">Custom Dashboards</span>
+                        <span class="tech-badge">Real-time Reports</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2>What Clients Say</h2>
+            <p>Join hundreds of satisfied clients who've transformed their business with conversational AI.</p>
+        </div>
+
+        <div class="testimonials-container">
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "Muzammil's expertise in conversational AI is exceptional. The chatbot he built for us reduced our support tickets by 60% in the first month. Highly recommended!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SA</div>
+                    <div class="author-info">
+                        <h4>Sarah Anderson</h4>
+                        <p>Director, TechFlow Corp</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "The lead qualification bot increased our sales team's productivity immediately. We're closing more deals and spending less time on unqualified leads."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">DP</div>
+                    <div class="author-info">
+                        <h4>Dr. Priya Patel</h4>
+                        <p>CEO, HealthTech Solutions</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "The voice bot implementation was seamless. Our appointment no-shows dropped from 25% to 8%. The ROI was undeniable."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MK</div>
+                    <div class="author-info">
+                        <h4>Michael K.</h4>
+                        <p>Manager, Premier Services</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "Outstanding work! The customization and attention to detail were incredible. Muzammil understood our unique needs perfectly."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JC</div>
+                    <div class="author-info">
+                        <h4>Jennifer Chen</h4>
+                        <p>Operations Lead, Global Retail</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "The professionalism and technical expertise demonstrated exceeded our expectations. Communication was clear throughout the entire project."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RJ</div>
+                    <div class="author-info">
+                        <h4>Robert Johnson</h4>
+                        <p>VP Sales, Enterprise Corp</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "Working with Muzammil was a game-changer. The bot handles complex conversations that I thought would need human agents."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">EL</div>
+                    <div class="author-info">
+                        <h4>Emily López</h4>
+                        <p>Founder, E-commerce Hub</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <h2>Ready to Transform Your Business?</h2>
+        <p>Let's discuss how conversational AI can automate your sales, support, and lead generation. Schedule a free consultation today.</p>
+        <button class="button-primary" style="background: white; color: var(--accent); border: none;" onclick="window.open('mailto:contact@example.com?subject=AI Consultation Request')">
+            Schedule Free Consultation
+        </button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="#services">Lead Generation</a>
+                <a href="#services">Lead Qualification</a>
+                <a href="#services">Sales Automation</a>
+                <a href="#services">Voice Bots</a>
+                <a href="#services">Support Bots</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#">Case Studies</a>
+                <a href="#">Blog</a>
+                <a href="#">Documentation</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <p>📧 contact@example.com</p>
+                <p>💼 LinkedIn Profile</p>
+                <p>🐙 GitHub</p>
+                <p>🌐 Portfolio</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Muzammil AI. All rights reserved. | Building the future of conversational intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Update CTA button email
+        document.querySelector('.cta-section button').onclick = function() {
+            // Replace 'contact@example.com' with your actual email
+            window.location.href = 'mailto:your-email@example.com?subject=AI Consultation Request';
+        };
+    </script>
+</body>
+</html>
