@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -810,6 +810,466 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Chat Animation Styles */
+        .chat-mockup-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            width: 100%;
+            height: 550px;
+            perspective: 1000px;
+        }
+        .chat-mockup {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 480px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(34, 197, 94, 0.1);
+            transform: rotateY(-5deg) rotateX(2deg);
+            transition: transform 0.5s ease;
+        }
+        .chat-mockup:hover { transform: rotateY(0) rotateX(0); }
+        .chat-header {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .chat-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: #000; font-weight: bold; font-size: 1rem; position: relative;
+            flex-shrink: 0;
+        }
+        .chat-avatar::after {
+            content: ''; position: absolute; bottom: 0; right: 0;
+            width: 10px; height: 10px; background: #22c55e;
+            border-radius: 50%; border: 2px solid #000;
+        }
+        .chat-title h4 { color: #fff; margin: 0; font-size: 0.95rem; font-weight: 600; }
+        .chat-title p { color: #9ca3af !important; margin: 0 !important; font-size: 0.75rem !important; }
+        .chat-body {
+            padding: 1.2rem; flex-grow: 1; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth;
+        }
+        .chat-body::-webkit-scrollbar { width: 4px; }
+        .chat-body::-webkit-scrollbar-track { background: transparent; }
+        .chat-body::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+        
+        .chat-message {
+            max-width: 85%; padding: 0.8rem 1rem; font-size: 0.9rem; line-height: 1.5;
+            opacity: 0; transform: translateY(10px);
+            animation: messagePopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        @keyframes messagePopIn { to { opacity: 1; transform: translateY(0); } }
+        .chat-message.bot {
+            align-self: flex-start; background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px 16px 16px 4px; color: #e5e7eb; border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .chat-message.user {
+            align-self: flex-end; background: rgba(34, 197, 94, 0.15);
+            border-radius: 16px 16px 4px 16px; color: #fff; border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        .typing-indicator {
+            display: none; align-items: center; gap: 4px; padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05); border-radius: 16px 16px 16px 4px;
+            align-self: flex-start; border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto;
+        }
+        .typing-dot {
+            width: 5px; height: 5px; background: #9ca3af; border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typingBounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+        
+        .chat-input-area {
+            padding: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.5); display: flex; gap: 0.8rem; align-items: center;
+        }
+        .chat-input {
+            flex-grow: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; padding: 0.6rem 1rem; color: #fff; font-size: 0.85rem;
+        }
+        .chat-send {
+            width: 36px; height: 36px; border-radius: 50%; background: var(--success);
+            border: none; display: flex; align-items: center; justify-content: center;
+            color: #000; cursor: pointer; flex-shrink: 0;
+        }
+        .chat-send svg { width: 16px; height: 16px; }
+
+        @media (max-width: 968px) {
+            .chat-mockup-wrapper { height: 500px; margin-top: 2rem; transform: none; }
+            .chat-mockup { transform: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        }
+
+
+        /* Integrations Section */
+        .integrations {
+            padding: 6rem 2rem;
+            background: var(--surface-light);
+            display: flex;
+            justify-content: center;
+        }
+
+        .integrations-container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--surface);
+            border-radius: 32px;
+            padding: 4rem 2rem 5rem;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+        }
+
+        .integration-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #16a34a;
+            padding: 0.45rem 1.1rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .integrations-header h2 {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+        }
+
+        .integrations-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 480px;
+            margin: 0 auto 3.5rem;
+            line-height: 1.7;
+        }
+
+        /* Arc diagram */
+        .arc-diagram {
+            position: relative;
+            width: 100%;
+            max-width: 860px;
+            height: 320px;
+            margin: 0 auto;
+        }
+
+        .arc-svg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: visible;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Connector lines from center hub to each icon */
+        .arc-svg line, .arc-svg path {
+            stroke: var(--border);
+            stroke-width: 1.5;
+            fill: none;
+            stroke-dasharray: 5 4;
+            opacity: 0.7;
+        }
+
+        /* Center hub */
+        .arc-hub {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            background: var(--surface);
+            border: 2px solid rgba(34,197,94,0.35);
+            border-radius: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 6px rgba(34,197,94,0.06), 0 15px 35px rgba(0,0,0,0.08);
+            z-index: 5;
+            cursor: default;
+        }
+
+        .arc-hub img {
+            width: 48px;
+            height: 48px;
+        }
+
+        /* Each integration icon node */
+        .arc-icon {
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+            z-index: 3;
+            transform: translate(-50%, -50%);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            cursor: pointer;
+        }
+
+        .arc-icon:hover {
+            transform: translate(-50%, -50%) scale(1.12);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.15);
+            border-color: #22c55e;
+            z-index: 10;
+        }
+
+        .arc-icon img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+
+        [data-theme="dark"] .arc-icon {
+            background: #ffffff;
+            border-color: rgba(0,0,0,0.08);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        [data-theme="dark"] .arc-hub {
+            background: #0d1117;
+        }
+
+        /* Positions: 5 icons on top arc, 4 across bottom */
+        /* Top arc (semi-circle): positions at equal angles 0-180 deg */
+        .arc-pos-1  { left: 7%;  top: 78%; }  /* bottom-left */
+        .arc-pos-2  { left: 20%; top: 22%; }  /* top-left-far */
+        .arc-pos-3  { left: 37%; top: 6%;  }  /* top-left-near */
+        .arc-pos-4  { left: 50%; top: 0%;  transform: translate(-50%, 0); }  /* top-center */
+        .arc-pos-5  { left: 63%; top: 6%;  }  /* top-right-near */
+        .arc-pos-6  { left: 80%; top: 22%; }  /* top-right-far */
+        .arc-pos-7  { left: 93%; top: 78%; }  /* bottom-right */
+        .arc-pos-8  { left: 20%; top: 78%; }  /* bottom-left-near */
+        .arc-pos-9  { left: 80%; top: 78%; }  /* bottom-right-near */
+
+        /* CTA below the arc */
+        .arc-cta {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .arc-cta-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .btn-view-integrations {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 0px;
+            padding: 0.9rem 2rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        [data-theme="dark"] .btn-view-integrations {
+            background: #22c55e;
+            color: #000;
+        }
+
+        .btn-view-integrations:hover {
+            background: #22c55e;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .btn-view-integrations svg {
+            width: 16px; height: 16px;
+        }
+
+        /* ========================
+           INTEGRATIONS MODAL
+           ======================== */
+        .integrations-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .integrations-modal-overlay.open {
+            display: flex;
+        }
+
+        .integrations-modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+            animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(24px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--secondary);
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .modal-header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0.3rem 0 0;
+        }
+
+        .modal-close {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: transparent;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .modal-integration-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--surface-light);
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+            cursor: default;
+        }
+
+        .modal-integration-card:hover {
+            border-color: #22c55e;
+            box-shadow: 0 8px 24px rgba(34,197,94,0.1);
+            transform: translateY(-2px);
+        }
+
+        .modal-icon-wrap {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        [data-theme="dark"] .modal-icon-wrap {
+            background: #ffffff;
+            border-color: rgba(0,0,0,0.08);
+        }
+
+        .modal-icon-wrap img {
+            width: 28px; height: 28px;
+            object-fit: contain;
+        }
+
+        .modal-card-info h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0 0 0.2rem;
+        }
+
+        .modal-card-info p {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .arc-diagram { height: 260px; }
+            .arc-icon { width: 56px; height: 56px; }
+            .arc-icon img { width: 28px; height: 28px; }
+            .arc-hub { width: 72px; height: 72px; }
+            .arc-hub img { width: 38px; height: 38px; }
+            .modal-grid { grid-template-columns: repeat(2, 1fr); }
+            .integrations-header h2 { font-size: 2rem; }
+            .integrations-modal { padding: 1.5rem; }
+        }
+
     </style>
 </head>
 
@@ -832,16 +1292,14 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <!-- Hero Section -->
+        <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-text">
-                <div class="badge-reviews">★★★★★ 50+ successful bots deployed</div>
-                <h1>Lead Generation & Qualification Bots That Skyrocket Sales</h1>
+                <div class="badge-reviews">★★★★★ Enterprise-Grade AI Agents</div>
+                <h1>Automated Sales Qualification & Pipeline Generation</h1>
                 <p>
-                    Stop losing potential clients after hours. Our intelligent AI agents capture, engage, and qualify
-                    leads round the clock, creating an automated cycle of revenue growth while you sleep.
+                    Stop leaking revenue from unqualified leads and delayed responses. We build conversational AI systems that engage, qualify, and route high-value B2B prospects directly to your sales team's calendar—24/7.
                 </p>
                 <div class="hero-buttons">
                     <button class="btn-split-left"
@@ -851,10 +1309,31 @@
                     <a href="#case-studies" class="btn-split-right">See Case Studies &rarr;</a>
                 </div>
             </div>
-            <div class="hero-image-founder">
-                <img src="founder.jpeg"
-                    onerror="this.src='founder.jpg'; this.onerror=function(){this.src='founder.png'}"
-                    alt="wakilz Founder - Conversational AI Expert">
+            
+            <div class="chat-mockup-wrapper">
+                <div class="chat-mockup">
+                    <div class="chat-header">
+                        <div class="chat-avatar">AI</div>
+                        <div class="chat-title">
+                            <h4>Enterprise SDR Agent</h4>
+                            <p>Online • Responds instantly</p>
+                        </div>
+                    </div>
+                    <div class="chat-body" id="chatBody">
+                        <!-- Messages injected via JS -->
+                        <div class="typing-indicator" id="typingIndicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="chat-input">Type a message...</div>
+                        <button class="chat-send">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -862,93 +1341,80 @@
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="section-header">
-            <h2>Comprehensive AI Solutions</h2>
-            <p>From lead generation to full sales automation, I provide end-to-end conversational AI services tailored
-                to your business needs.</p>
+            <h2>Enterprise Revenue Operations AI</h2>
+            <p>We build autonomous AI agents that handle the heavy lifting across your entire sales funnel—from top-of-funnel capture to fully qualified meetings.</p>
         </div>
 
         <div class="services-container">
-            <!-- Lead Generation Chatbots -->
             <div class="service-card fade-in">
                 <span class="service-icon">💬</span>
-                <h3>Lead Generation Chatbots</h3>
-                <p>Intelligent chatbots that engage website visitors, qualify leads, and capture contact information
-                    automatically.</p>
+                <h3>Inbound Lead Capture</h3>
+                <p>Deploy intelligent agents that instantly engage high-intent visitors, preventing pipeline leakage outside of business hours.</p>
                 <ul class="service-features">
-                    <li>Multi-channel integration (Web, WhatsApp, Messenger)</li>
-                    <li>Real-time lead scoring</li>
-                    <li>Automated qualification workflows</li>
-                    <li>CRM synchronization</li>
+                    <li>Omnichannel deployment (Web, WhatsApp)</li>
+                    <li>Dynamic intent recognition</li>
+                    <li>Seamless CRM synchronization</li>
+                    <li>Zero-latency response rates</li>
                 </ul>
             </div>
 
-            <!-- Lead Qualification -->
             <div class="service-card fade-in">
                 <span class="service-icon">🎯</span>
-                <h3>Lead Qualification Systems</h3>
-                <p>Advanced AI systems that qualify leads based on custom criteria, routing only the most valuable
-                    prospects to your team.</p>
+                <h3>Automated Sales Qualification</h3>
+                <p>Implement sophisticated qualification matrices that filter out noise and route only enterprise-ready prospects to your Account Executives.</p>
                 <ul class="service-features">
-                    <li>Custom qualification rules</li>
-                    <li>Intent detection</li>
-                    <li>Budget & timeline analysis</li>
-                    <li>Smart routing to sales team</li>
+                    <li>BANT & MEDDIC qualification frameworks</li>
+                    <li>Contextual objection handling</li>
+                    <li>Firmographic data enrichment</li>
+                    <li>Conditional logic routing</li>
                 </ul>
             </div>
 
-            <!-- Sales Automation -->
             <div class="service-card fade-in">
                 <span class="service-icon">🚀</span>
-                <h3>Sales Automation Bots</h3>
-                <p>Full-featured sales bots that handle discovery calls, demos, objection handling, and meeting
-                    scheduling.</p>
+                <h3>Full-Cycle Sales Automation</h3>
+                <p>End-to-end automation of the sales discovery process. Our LLM-powered agents conduct preliminary needs analysis before human handover.</p>
                 <ul class="service-features">
-                    <li>Sales conversation automation</li>
-                    <li>Calendar integration & booking</li>
-                    <li>Follow-up automation</li>
-                    <li>Sales pipeline tracking</li>
+                    <li>Conversational discovery flows</li>
+                    <li>Automated pipeline stage updates</li>
+                    <li>Drip campaign triggers</li>
+                    <li>Revenue attribution tracking</li>
                 </ul>
             </div>
 
-            <!-- Voice AI -->
             <div class="service-card fade-in">
                 <span class="service-icon">🎤</span>
-                <h3>Voice & Phone Bots</h3>
-                <p>Natural-sounding voice AI agents for inbound/outbound calls, customer support, and appointment
-                    booking.</p>
+                <h3>Conversational Voice AI</h3>
+                <p>Deploy low-latency, human-like voice agents for inbound call deflection and outbound appointment setting at scale.</p>
                 <ul class="service-features">
-                    <li>Multi-language voice support</li>
-                    <li>Human-like conversations</li>
-                    <li>Emotion detection</li>
-                    <li>Telephony integration</li>
+                    <li>Sub-500ms latency voice response</li>
+                    <li>Advanced semantic understanding</li>
+                    <li>Real-time sentiment analysis</li>
+                    <li>Telephony & VoIP integration</li>
                 </ul>
             </div>
 
-            <!-- Customer Support -->
             <div class="service-card fade-in">
                 <span class="service-icon">🛟</span>
-                <h3>Customer Support Bots</h3>
-                <p>Intelligent support bots that handle common questions, troubleshooting, and escalation to human
-                    agents.</p>
+                <h3>Intelligent Support Resolution</h3>
+                <p>Deflect Level 1 & 2 support tickets with RAG-enabled agents trained securely on your company's proprietary knowledge base.</p>
                 <ul class="service-features">
-                    <li>Knowledge base integration</li>
-                    <li>Ticket creation & routing</li>
-                    <li>Sentiment analysis</li>
-                    <li>HIPAA/compliance ready</li>
+                    <li>Vector database RAG architecture</li>
+                    <li>Automated Jira/Zendesk ticketing</li>
+                    <li>Human-in-the-loop escalation</li>
+                    <li>Enterprise-grade data privacy</li>
                 </ul>
             </div>
 
-            <!-- Booking & Scheduling -->
             <div class="service-card fade-in">
                 <span class="service-icon">📅</span>
-                <h3>Booking & Scheduling Bots</h3>
-                <p>Automated appointment systems that integrate with calendars, handle conflicts, and send reminders.
-                </p>
+                <h3>Frictionless Meeting Scheduling</h3>
+                <p>Eliminate back-and-forth emails with contextual scheduling agents that understand timezones, availability, and meeting priority.</p>
                 <ul class="service-features">
-                    <li>Calendar sync (Google, Outlook)</li>
-                    <li>Timezone handling</li>
-                    <li>Reminder & confirmation flows</li>
-                    <li>No-show reduction</li>
+                    <li>Direct G-Suite & Office365 sync</li>
+                    <li>Multi-stakeholder coordination</li>
+                    <li>Automated prep-material delivery</li>
+                    <li>No-show mitigation workflows</li>
                 </ul>
             </div>
         </div>
@@ -957,8 +1423,8 @@
     <!-- Case Studies Section -->
     <section class="case-studies" id="case-studies">
         <div class="section-header" style="margin-bottom: 3rem;">
-            <h2>Real Results from Real Clients</h2>
-            <p>See how conversational AI transformed businesses across industries.</p>
+            <h2>Proven Enterprise Impact</h2>
+            <p>Explore how leading organizations leverage our conversational AI to accelerate revenue.</p>
         </div>
 
         <div class="case-studies-container">
@@ -1018,77 +1484,142 @@
         </div>
     </section>
 
-    <!-- Technologies Section -->
-    <section class="technologies" id="tech">
-        <div class="tech-container">
-            <div class="section-header">
-                <h2>Technology Stack</h2>
-                <p>Built with the latest and most reliable conversational AI platforms and integrations.</p>
+    <!-- Integrations Section -->
+    <section class="integrations" id="tech">
+        <div class="integrations-container fade-in">
+            <div class="integration-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7H7a5 5 0 0 0 0 10h10a5 5 0 0 0 0-10zm0 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                18 Native Integrations
             </div>
 
-            <div class="tech-grid">
-                <div class="tech-card fade-in">
-                    <h4>Conversational AI Platforms</h4>
-                    <div class="tech-items">
-                        <span class="tech-badge">Voiceflow</span>
-                        <span class="tech-badge">Make.com</span>
-                        <span class="tech-badge">n8n</span>
-                        <span class="tech-badge">Zapier</span>
-                    </div>
+            <div class="integrations-header">
+                <h2>Works With Tools You Already Use</h2>
+                <p>Our agents plug directly into your existing stack — CRMs, messengers, calendars, and more — with zero-code setup.</p>
+            </div>
+
+            <!-- Arc Diagram -->
+            <div class="arc-diagram" id="arcDiagram">
+                <!-- SVG connector lines drawn by JS -->
+                <svg class="arc-svg" id="arcSvg"></svg>
+
+                <!-- Center Hub: wakilz AI -->
+                <div class="arc-hub" title="wakilz AI">
+                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+                        <rect width="46" height="46" rx="12" fill="#22c55e"/>
+                        <text x="23" y="30" text-anchor="middle" font-size="18" font-weight="800" fill="#000" font-family="Inter,sans-serif">W</text>
+                    </svg>
                 </div>
 
-                <div class="tech-card fade-in">
-                    <h4>Voice & NLP</h4>
-                    <div class="tech-items">
-                        <span class="tech-badge">OpenAI API</span>
-                        <span class="tech-badge">Google Cloud NLP</span>
-                        <span class="tech-badge">Twilio</span>
-                        <span class="tech-badge">Azure Speech</span>
-                    </div>
-                </div>
+                <!-- 9 arc icons -->
+                <div class="arc-icon arc-pos-1" title="Google Calendar"><img src="assets/icons/integrations/googlecalendar.svg" alt="Google Calendar"></div>
+                <div class="arc-icon arc-pos-2" title="Salesforce"><img src="assets/icons/integrations/salesforce.svg" alt="Salesforce"></div>
+                <div class="arc-icon arc-pos-3" title="HubSpot"><img src="assets/icons/integrations/hubspot.svg" alt="HubSpot"></div>
+                <div class="arc-icon arc-pos-4" title="Slack"><img src="assets/icons/integrations/slack.svg" alt="Slack"></div>
+                <div class="arc-icon arc-pos-5" title="Microsoft Teams"><img src="assets/icons/integrations/microsoftteams.svg" alt="Microsoft Teams"></div>
+                <div class="arc-icon arc-pos-6" title="Zapier"><img src="assets/icons/integrations/zapier.svg" alt="Zapier"></div>
+                <div class="arc-icon arc-pos-7" title="Stripe"><img src="assets/icons/integrations/stripe.svg" alt="Stripe"></div>
+                <div class="arc-icon arc-pos-8" title="Notion"><img src="assets/icons/integrations/notion.svg" alt="Notion"></div>
+                <div class="arc-icon arc-pos-9" title="WhatsApp"><img src="assets/icons/integrations/whatsapp.svg" alt="WhatsApp"></div>
+            </div>
 
-                <div class="tech-card fade-in">
-                    <h4>CRM & Integrations</h4>
-                    <div class="tech-items">
-                        <span class="tech-badge">HubSpot</span>
-                        <span class="tech-badge">Salesforce</span>
-                        <span class="tech-badge">Pipedrive</span>
-                        <span class="tech-badge">Custom APIs</span>
-                    </div>
-                </div>
-
-                <div class="tech-card fade-in">
-                    <h4>Messaging Channels</h4>
-                    <div class="tech-items">
-                        <span class="tech-badge">WhatsApp</span>
-                        <span class="tech-badge">Messenger</span>
-                        <span class="tech-badge">Instagram DM</span>
-                        <span class="tech-badge">SMS/Twilio</span>
-                    </div>
-                </div>
-
-                <div class="tech-card fade-in">
-                    <h4>Calendar & Booking</h4>
-                    <div class="tech-items">
-                        <span class="tech-badge">Google Calendar</span>
-                        <span class="tech-badge">Outlook</span>
-                        <span class="tech-badge">Calendly</span>
-                        <span class="tech-badge">Stripe Payments</span>
-                    </div>
-                </div>
-
-                <div class="tech-card fade-in">
-                    <h4>Analytics & Tracking</h4>
-                    <div class="tech-items">
-                        <span class="tech-badge">Mixpanel</span>
-                        <span class="tech-badge">Segment</span>
-                        <span class="tech-badge">Custom Dashboards</span>
-                        <span class="tech-badge">Real-time Reports</span>
-                    </div>
-                </div>
+            <!-- CTA -->
+            <div class="arc-cta">
+                <p class="arc-cta-label">HubSpot · Salesforce · Slack · Zapier · Stripe · WhatsApp · Zendesk · Calendly · and more</p>
+                <button class="btn-view-integrations" id="openIntegrationsModal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    View All 18 Integrations
+                </button>
             </div>
         </div>
     </section>
+
+    <!-- Integrations Modal -->
+    <div class="integrations-modal-overlay" id="integrationsModalOverlay">
+        <div class="integrations-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <div>
+                    <h3 id="modalTitle">All Integrations</h3>
+                    <p>18 native connections — zero code required</p>
+                </div>
+                <button class="modal-close" id="closeIntegrationsModal" aria-label="Close">✕</button>
+            </div>
+            <div class="modal-grid">
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/hubspot.svg" alt="HubSpot"></div>
+                    <div class="modal-card-info"><h4>HubSpot</h4><p>CRM &amp; Marketing Hub</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/salesforce.svg" alt="Salesforce"></div>
+                    <div class="modal-card-info"><h4>Salesforce</h4><p>Enterprise CRM</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/slack.svg" alt="Slack"></div>
+                    <div class="modal-card-info"><h4>Slack</h4><p>Team Messaging</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/microsoftteams.svg" alt="Microsoft Teams"></div>
+                    <div class="modal-card-info"><h4>Microsoft Teams</h4><p>Business Communication</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/googlecalendar.svg" alt="Google Calendar"></div>
+                    <div class="modal-card-info"><h4>Google Calendar</h4><p>Scheduling &amp; Booking</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/zapier.svg" alt="Zapier"></div>
+                    <div class="modal-card-info"><h4>Zapier</h4><p>Workflow Automation</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/notion.svg" alt="Notion"></div>
+                    <div class="modal-card-info"><h4>Notion</h4><p>Knowledge Base &amp; Docs</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/stripe.svg" alt="Stripe"></div>
+                    <div class="modal-card-info"><h4>Stripe</h4><p>Payments &amp; Billing</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/whatsapp.svg" alt="WhatsApp"></div>
+                    <div class="modal-card-info"><h4>WhatsApp</h4><p>Messaging &amp; Outreach</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/twilio.svg" alt="Twilio"></div>
+                    <div class="modal-card-info"><h4>Twilio</h4><p>SMS &amp; Voice API</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/zendesk.svg" alt="Zendesk"></div>
+                    <div class="modal-card-info"><h4>Zendesk</h4><p>Customer Support</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/calendly.svg" alt="Calendly"></div>
+                    <div class="modal-card-info"><h4>Calendly</h4><p>Meeting Scheduling</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/mailchimp.svg" alt="Mailchimp"></div>
+                    <div class="modal-card-info"><h4>Mailchimp</h4><p>Email Marketing</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/activecampaign.svg" alt="ActiveCampaign"></div>
+                    <div class="modal-card-info"><h4>ActiveCampaign</h4><p>Marketing Automation</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/intercom.svg" alt="Intercom"></div>
+                    <div class="modal-card-info"><h4>Intercom</h4><p>Customer Messaging</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/pipedrive.svg" alt="Pipedrive"></div>
+                    <div class="modal-card-info"><h4>Pipedrive</h4><p>Sales Pipeline CRM</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/airtable.svg" alt="Airtable"></div>
+                    <div class="modal-card-info"><h4>Airtable</h4><p>Database &amp; Workflows</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/make.svg" alt="Make"></div>
+                    <div class="modal-card-info"><h4>Make</h4><p>Advanced Automation</p></div>
+                </div>
+            </div>
+            <p class="modal-footer">All integrations are bi-directional and require zero code to set up.</p>
+        </div>
+    </div>
 
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
@@ -1192,12 +1723,12 @@
 
     <!-- CTA Section -->
     <section class="cta-section" id="contact">
-        <h2>Ready to Transform Your Business?</h2>
+        <h2>Ready to Scale Your Revenue Operations?</h2>
         <p>Let's discuss how conversational AI can automate your sales, support, and lead generation. Schedule a free
             consultation today.</p>
-        <button class="button-primary" style="background: #000000; color: #ffffff;"
+        <button class="cta-button" style="background: #000000 !important; color: #ffffff !important; padding: 1.2rem 2.5rem; font-size: 1.1rem; border-radius: 8px;"
             onclick="window.open('mailto:contact@example.com?subject=AI Consultation Request')">
-            Schedule Free Consultation
+            Book Strategy Discovery Call
         </button>
     </section>
 
@@ -1259,6 +1790,68 @@
             observer.observe(el);
         });
 
+        // =============================================
+        // Arc Diagram: draw dashed connector lines
+        // from each icon to the center hub
+        // =============================================
+        function drawArcLines() {
+            const diagram = document.getElementById('arcDiagram');
+            const svgEl   = document.getElementById('arcSvg');
+            if (!diagram || !svgEl) return;
+
+            svgEl.innerHTML = '';
+            const dRect = diagram.getBoundingClientRect();
+
+            // Center hub center point (relative to diagram)
+            const hub = diagram.querySelector('.arc-hub');
+            if (!hub) return;
+            const hRect = hub.getBoundingClientRect();
+            const cx = hRect.left + hRect.width  / 2 - dRect.left;
+            const cy = hRect.top  + hRect.height / 2 - dRect.top;
+
+            diagram.querySelectorAll('.arc-icon').forEach(icon => {
+                const iRect = icon.getBoundingClientRect();
+                const ix = iRect.left + iRect.width  / 2 - dRect.left;
+                const iy = iRect.top  + iRect.height / 2 - dRect.top;
+
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', cx);
+                line.setAttribute('y1', cy);
+                line.setAttribute('x2', ix);
+                line.setAttribute('y2', iy);
+                svgEl.appendChild(line);
+            });
+        }
+
+        window.addEventListener('load',   drawArcLines);
+        window.addEventListener('resize', drawArcLines);
+        setTimeout(drawArcLines, 300);
+
+        // =============================================
+        // Integrations Modal
+        // =============================================
+        const modalOverlay  = document.getElementById('integrationsModalOverlay');
+        const openModalBtn  = document.getElementById('openIntegrationsModal');
+        const closeModalBtn = document.getElementById('closeIntegrationsModal');
+
+        function openModal() {
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        if (openModalBtn)  openModalBtn.addEventListener('click', openModal);
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        if (modalOverlay)  modalOverlay.addEventListener('click', e => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+
         // Theme Toggle Logic
         const themeToggle = document.getElementById('themeToggle');
         const root = document.documentElement;
@@ -1290,6 +1883,87 @@
                 }
             });
         });
+
+
+        // Chat Animation Logic
+        const chatMessages = [
+            { type: 'bot', text: "Hi there! I'm Wakilz's AI SDR. I noticed you're exploring conversational AI for revenue operations. How can I help?" },
+            { type: 'user', text: "Just looking around. Not sure if AI is right for us." },
+            { type: 'bot', text: "I completely understand. Many of our clients start there. What's your current biggest bottleneck in the sales process?" },
+            { type: 'user', text: "Our reps spend too much time chasing unqualified leads." },
+            { type: 'bot', text: "That's a classic revenue leak. On average, our AI agents recover 40% of lost SDR hours by qualifying inbound leads 24/7. What's your monthly inbound volume?" },
+            { type: 'user', text: "Around 2,000 leads/month." },
+            { type: 'bot', text: "At that volume, manual qualification is definitely inefficient. Are you currently using a CRM like Salesforce or HubSpot?" },
+            { type: 'user', text: "HubSpot. But integration is usually a nightmare." },
+            { type: 'bot', text: "Valid concern! We actually have native, bi-directional HubSpot integration. It logs custom properties and lead scores in real-time, zero code required." },
+            { type: 'user', text: "What about the chat quality? I don't want a robotic bot annoying our enterprise clients." },
+            { type: 'bot', text: "That's the difference between legacy chatbots and our LLM-powered agents. We use advanced RAG (Retrieval-Augmented Generation) so the bot sounds human, stays on-brand, and handles complex nuances." },
+            { type: 'user', text: "How long does implementation take?" },
+            { type: 'bot', text: "Typically under 2 weeks from kickoff to deployment. We handle the heavy lifting: prompt engineering, knowledge base ingestion, and testing." },
+            { type: 'user', text: "What kind of ROI can we expect?" },
+            { type: 'bot', text: "Clients with similar volume usually see a 3x increase in qualified meetings booked within the first 45 days. We also guarantee a 99.9% uptime SLA." },
+            { type: 'user', text: "Sounds promising. What's the pricing model?" },
+            { type: 'bot', text: "We offer performance-tied tiers or flat enterprise licensing depending on your needs. Let's get an expert to tailor a quote." },
+            { type: 'user', text: "Okay, I'm open to a quick chat." },
+            { type: 'bot', text: "Perfect. I've pulled up our Enterprise Specialist's calendar. Does Tuesday at 2 PM EST work for a 15-minute discovery call?" },
+            { type: 'user', text: "Yes, that works." },
+            { type: 'bot', text: "Meeting booked! The calendar invite is in your inbox. Looking forward to showing you the platform." }
+        ];
+
+        const chatBody = document.getElementById('chatBody');
+        const typingIndicator = document.getElementById('typingIndicator');
+        let currentMessageIndex = 0;
+
+        function addMessage(msg) {
+            const div = document.createElement('div');
+            div.className = `chat-message ${msg.type}`;
+            div.textContent = msg.text;
+            chatBody.insertBefore(div, typingIndicator);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function playChat() {
+            if (currentMessageIndex >= chatMessages.length) {
+                typingIndicator.style.display = 'none';
+                return;
+            }
+            
+            const msg = chatMessages[currentMessageIndex];
+            
+            if (msg.type === 'bot') {
+                typingIndicator.style.display = 'flex';
+                scrollToBottom();
+                
+                const typingDelay = Math.min(Math.max(msg.text.length * 20, 800), 2500);
+                
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    addMessage(msg);
+                    currentMessageIndex++;
+                    setTimeout(playChat, 1200); // Wait before user replies
+                }, typingDelay);
+            } else {
+                setTimeout(() => {
+                    addMessage(msg);
+                    currentMessageIndex++;
+                    setTimeout(playChat, 600); // Bot replies quickly
+                }, 1500);
+            }
+        }
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setTimeout(playChat, 1000);
+                heroObserver.disconnect();
+            }
+        });
+        
+        const mockup = document.querySelector('.chat-mockup');
+        if(mockup) heroObserver.observe(mockup);
 
         // Update CTA button email
         document.querySelector('.cta-section button').onclick = function () {
