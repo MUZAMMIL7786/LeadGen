@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -74,11 +74,22 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+        }
+
+        .logo-text {
             font-size: 1.5rem;
             font-weight: 800;
             color: #22c55e;
             letter-spacing: -0.5px;
-            text-decoration: none;
         }
 
         .nav-links {
@@ -1277,7 +1288,10 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">wakilz</div>
+            <a href="/" class="logo">
+                <img src="assets/images/logo.png" alt="wakilz logo">
+                <span class="logo-text">wakilz</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#case-studies">Case Studies</a></li>
