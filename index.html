@@ -42,6 +42,7 @@
             height: 72px;
             z-index: 1000;
             transition: background 0.3s ease, backdrop-filter 0.3s ease;
+            isolation: isolate;
         }
         nav.scrolled {
             background: rgba(10, 10, 10, 0.85);
@@ -114,21 +115,19 @@
         /* ===== HERO ===== */
         .hero {
             position: relative;
+            z-index: 1;
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding: 120px 24px 80px;
-            overflow: hidden;
         }
         #particle-canvas {
-            position: absolute;
+            position: fixed;
             top: 0; left: 0;
             width: 100%;
-            height: calc(100% + 200px);
+            height: 100%;
             z-index: 0;
             pointer-events: none;
-            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
         }
         .hero-container {
             position: relative;
@@ -401,6 +400,7 @@
         .section {
             padding: 100px 24px;
             position: relative;
+            z-index: 1;
         }
         .section.bg-secondary { background: var(--bg-secondary); }
         .section-container {
@@ -929,6 +929,7 @@
             padding: 100px 24px;
             background: var(--accent-mint);
             position: relative;
+            z-index: 1;
             overflow: hidden;
         }
         .cta-section::before {
@@ -998,6 +999,8 @@
         footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-subtle);
+            position: relative;
+            z-index: 1;
         }
         .footer-top {
             max-width: 1200px;
@@ -1090,6 +1093,9 @@
     </style>
 </head>
 <body>
+    <!-- Full-page particle canvas (fixed background) -->
+    <canvas id="particle-canvas"></canvas>
+
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
@@ -1112,7 +1118,6 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <canvas id="particle-canvas"></canvas>
         <div class="hero-container">
             <div class="hero-text">
                 <div class="hero-badge">
@@ -1564,9 +1569,8 @@
         const COLORS = ['#22c55e', '#10b981', '#34d399', '#6ee7b7', '#ffffff'];
 
         function resizeCanvas() {
-            const hero = document.querySelector('.hero');
             canvas.width = window.innerWidth;
-            canvas.height = hero.offsetHeight + 200;
+            canvas.height = window.innerHeight;
         }
 
         class Particle {
@@ -1664,10 +1668,8 @@
         }
 
         window.addEventListener('mousemove', (e) => {
-            const hero = document.querySelector('.hero');
-            const rect = hero.getBoundingClientRect();
             mouseX = e.clientX;
-            mouseY = e.clientY - rect.top + window.scrollY;
+            mouseY = e.clientY;
         });
 
         window.addEventListener('resize', () => {
