@@ -2,7 +2,7 @@ name: Generate Sitemap
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master", "stage", "prod" ]
     paths:
       - '**/*.html'
 
