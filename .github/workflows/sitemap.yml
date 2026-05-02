@@ -1,0 +1,34 @@
+name: Generate Sitemap
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    paths:
+      - '**/*.html'
+
+permissions:
+  contents: write
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history so timestamps are accurate
+
+      - name: Generate sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://www.wakilz.com/
+          drop-html-extension: true
+          exclude-paths: "index-old.html"
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git commit -m "chore: auto-generate sitemap.xml [skip ci]" || echo "No changes to commit"
+          git push
