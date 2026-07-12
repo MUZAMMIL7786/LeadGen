@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wakilz - AI Conversations & Lead Qualification Experts</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="apple-touch-icon" href="/favicon-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #014b3d;
+            --secondary: #000000;
+            --accent: #014b3d;
+            --accent-light: #006b56;
+            --text-primary: #000000;
+            --text-secondary: #4b5563;
+            --border: #e5e7eb;
+            --success: #22c55e;
+            --surface: #ffffff;
+            --surface-light: #f9fafb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--surface);
+            background-image: radial-gradient(circle at right center, rgba(1, 75, 61, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at left center, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            letter-spacing: -0.01em;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+            padding: 1.2rem 0;
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #22c55e;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: #22c55e !important;
+            color: #000000 !important;
+            padding: 0.8rem 1.8rem;
+            border-radius: 0px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Founder Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 2rem 60px;
+            overflow: hidden;
+            background: #000000 !important;
+            color: #ffffff;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: linear-gradient(rgba(34, 197, 94, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 197, 94, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at 30% 50%, black 0%, transparent 60%);
+            -webkit-mask-image: radial-gradient(circle at 30% 50%, black 0%, transparent 60%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .badge-reviews {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            color: #22c55e;
+            font-weight: 600;
+            background: rgba(34, 197, 94, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .hero-text h1 {
+            font-size: 4.2rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-split-left {
+            background: #22c55e;
+            color: #000000;
+            padding: 1rem 2.5rem;
+            border-radius: 0px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-split-right {
+            background: transparent;
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border-radius: 0px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-split-left:hover {
+            transform: translateY(-2px);
+            background: #16a34a;
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.6);
+        }
+
+        .btn-split-right:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .hero-image-founder {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 2;
+        }
+
+        .hero-image-founder img {
+            width: 100%;
+            height: auto;
+            max-width: 550px;
+            border-radius: 0;
+            filter: contrast(1.15) brightness(1.1);
+            -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+            mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+        }
+
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin: 0 auto 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--surface);
+            margin-top: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-light);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.2);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .service-features li {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Case Studies Section */
+        .case-studies {
+            padding: 5rem 2rem;
+            background: var(--surface-light);
+        }
+
+        .case-studies-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .case-study {
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 0px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .case-study:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .case-study:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .case-study:nth-child(even) .case-study-text {
+            order: 2;
+        }
+
+        .case-study:nth-child(even) .case-study-metrics {
+            order: 1;
+        }
+
+        .case-study-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-light);
+        }
+
+        .case-study-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .case-study-quote {
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 4px solid var(--accent-light);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .case-study-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .metric {
+            text-align: center;
+            background: rgba(59, 130, 246, 0.05);
+            padding: 2rem;
+            border-radius: 0px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Technologies Section */
+        .technologies {
+            padding: 5rem 2rem;
+            background: var(--surface);
+        }
+
+        .tech-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            border-color: var(--accent-light);
+            transform: translateY(-5px);
+        }
+
+        .tech-card h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .tech-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .tech-badge {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 2rem;
+            background: var(--surface-light);
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 0px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .author-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: #22c55e;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #000000;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: #111111;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface);
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 5rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-section a,
+        .footer-section p {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image-container {
+                height: 350px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+
+            .case-study {
+                grid-template-columns: 1fr;
+            }
+
+            .case-study:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+
+            .case-study:nth-child(even) .case-study-text {
+                order: unset;
+            }
+
+            .case-study:nth-child(even) .case-study-metrics {
+                order: unset;
+            }
+
+            .case-study-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        [data-theme="dark"] {
+            --primary: #027a63;
+            --secondary: #ffffff;
+            --accent: #22c55e;
+            --accent-light: #10b981;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border: #333333;
+            --surface: #0a0a0a;
+            --surface-light: #111111;
+        }
+
+        [data-theme="dark"] nav {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .button-secondary {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="dark"] .button-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .button-primary,
+        /* [data-theme="dark"] .cta-button, */
+        [data-theme="dark"] .author-avatar {
+            color: #000000;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 1.5rem;
+            transition: transform 0.3s ease;
+            vertical-align: middle;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Chat Animation Styles */
+        .chat-mockup-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            width: 100%;
+            height: 550px;
+            perspective: 1000px;
+        }
+        .chat-mockup {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 480px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(34, 197, 94, 0.1);
+            transform: rotateY(-5deg) rotateX(2deg);
+            transition: transform 0.5s ease;
+        }
+        .chat-mockup:hover { transform: rotateY(0) rotateX(0); }
+        .chat-header {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .chat-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: #000; font-weight: bold; font-size: 1rem; position: relative;
+            flex-shrink: 0;
+        }
+        .chat-avatar::after {
+            content: ''; position: absolute; bottom: 0; right: 0;
+            width: 10px; height: 10px; background: #22c55e;
+            border-radius: 50%; border: 2px solid #000;
+        }
+        .chat-title h4 { color: #fff; margin: 0; font-size: 0.95rem; font-weight: 600; }
+        .chat-title p { color: #9ca3af !important; margin: 0 !important; font-size: 0.75rem !important; }
+        .chat-body {
+            padding: 1.2rem; flex-grow: 1; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth;
+        }
+        .chat-body::-webkit-scrollbar { width: 4px; }
+        .chat-body::-webkit-scrollbar-track { background: transparent; }
+        .chat-body::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+        
+        .chat-message {
+            max-width: 85%; padding: 0.8rem 1rem; font-size: 0.9rem; line-height: 1.5;
+            opacity: 0; transform: translateY(10px);
+            animation: messagePopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        @keyframes messagePopIn { to { opacity: 1; transform: translateY(0); } }
+        .chat-message.bot {
+            align-self: flex-start; background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px 16px 16px 4px; color: #e5e7eb; border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .chat-message.user {
+            align-self: flex-end; background: rgba(34, 197, 94, 0.15);
+            border-radius: 16px 16px 4px 16px; color: #fff; border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        .typing-indicator {
+            display: none; align-items: center; gap: 4px; padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05); border-radius: 16px 16px 16px 4px;
+            align-self: flex-start; border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto;
+        }
+        .typing-dot {
+            width: 5px; height: 5px; background: #9ca3af; border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typingBounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+        
+        .chat-input-area {
+            padding: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.5); display: flex; gap: 0.8rem; align-items: center;
+        }
+        .chat-input {
+            flex-grow: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; padding: 0.6rem 1rem; color: #fff; font-size: 0.85rem;
+        }
+        .chat-send {
+            width: 36px; height: 36px; border-radius: 50%; background: var(--success);
+            border: none; display: flex; align-items: center; justify-content: center;
+            color: #000; cursor: pointer; flex-shrink: 0;
+        }
+        .chat-send svg { width: 16px; height: 16px; }
+
+        @media (max-width: 968px) {
+            .chat-mockup-wrapper { height: 500px; margin-top: 2rem; transform: none; }
+            .chat-mockup { transform: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        }
+
+
+        /* Integrations Section */
+        .integrations {
+            padding: 6rem 2rem;
+            background: var(--surface-light);
+            display: flex;
+            justify-content: center;
+        }
+
+        .integrations-container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--surface);
+            border-radius: 32px;
+            padding: 4rem 2rem 5rem;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+        }
+
+        .integration-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #16a34a;
+            padding: 0.45rem 1.1rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .integrations-header h2 {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+        }
+
+        .integrations-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 480px;
+            margin: 0 auto 3.5rem;
+            line-height: 1.7;
+        }
+
+        /* Arc diagram */
+        .arc-diagram {
+            position: relative;
+            width: 100%;
+            max-width: 860px;
+            height: 320px;
+            margin: 0 auto;
+        }
+
+        .arc-svg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: visible;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Connector lines from center hub to each icon */
+        .arc-svg line, .arc-svg path {
+            stroke: var(--border);
+            stroke-width: 1.5;
+            fill: none;
+            stroke-dasharray: 5 4;
+            opacity: 0.7;
+        }
+
+        /* Center hub */
+        .arc-hub {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            background: var(--surface);
+            border: 2px solid rgba(34,197,94,0.35);
+            border-radius: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 6px rgba(34,197,94,0.06), 0 15px 35px rgba(0,0,0,0.08);
+            z-index: 5;
+            cursor: default;
+        }
+
+        .arc-hub img {
+            width: 48px;
+            height: 48px;
+        }
+
+        /* Each integration icon node */
+        .arc-icon {
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+            z-index: 3;
+            transform: translate(-50%, -50%);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            cursor: pointer;
+        }
+
+        .arc-icon:hover {
+            transform: translate(-50%, -50%) scale(1.12);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.15);
+            border-color: #22c55e;
+            z-index: 10;
+        }
+
+        .arc-icon img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+
+        [data-theme="dark"] .arc-icon {
+            background: #ffffff;
+            border-color: rgba(0,0,0,0.08);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        [data-theme="dark"] .arc-hub {
+            background: #0d1117;
+        }
+
+        /* Positions: 5 icons on top arc, 4 across bottom */
+        /* Top arc (semi-circle): positions at equal angles 0-180 deg */
+        .arc-pos-1  { left: 7%;  top: 78%; }  /* bottom-left */
+        .arc-pos-2  { left: 20%; top: 22%; }  /* top-left-far */
+        .arc-pos-3  { left: 37%; top: 6%;  }  /* top-left-near */
+        .arc-pos-4  { left: 50%; top: 0%;  transform: translate(-50%, 0); }  /* top-center */
+        .arc-pos-5  { left: 63%; top: 6%;  }  /* top-right-near */
+        .arc-pos-6  { left: 80%; top: 22%; }  /* top-right-far */
+        .arc-pos-7  { left: 93%; top: 78%; }  /* bottom-right */
+        .arc-pos-8  { left: 20%; top: 78%; }  /* bottom-left-near */
+        .arc-pos-9  { left: 80%; top: 78%; }  /* bottom-right-near */
+
+        /* CTA below the arc */
+        .arc-cta {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .arc-cta-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .btn-view-integrations {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 0px;
+            padding: 0.9rem 2rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        [data-theme="dark"] .btn-view-integrations {
+            background: #22c55e;
+            color: #000;
+        }
+
+        .btn-view-integrations:hover {
+            background: #22c55e;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .btn-view-integrations svg {
+            width: 16px; height: 16px;
+        }
+
+        /* ========================
+           INTEGRATIONS MODAL
+           ======================== */
+        .integrations-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .integrations-modal-overlay.open {
+            display: flex;
+        }
+
+        .integrations-modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+            animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(24px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--secondary);
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .modal-header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0.3rem 0 0;
+        }
+
+        .modal-close {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: transparent;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .modal-integration-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--surface-light);
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+            cursor: default;
+        }
+
+        .modal-integration-card:hover {
+            border-color: #22c55e;
+            box-shadow: 0 8px 24px rgba(34,197,94,0.1);
+            transform: translateY(-2px);
+        }
+
+        .modal-icon-wrap {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        [data-theme="dark"] .modal-icon-wrap {
+            background: #ffffff;
+            border-color: rgba(0,0,0,0.08);
+        }
+
+        .modal-icon-wrap img {
+            width: 28px; height: 28px;
+            object-fit: contain;
+        }
+
+        .modal-card-info h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0 0 0.2rem;
+        }
+
+        .modal-card-info p {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .arc-diagram { height: 260px; }
+            .arc-icon { width: 56px; height: 56px; }
+            .arc-icon img { width: 28px; height: 28px; }
+            .arc-hub { width: 72px; height: 72px; }
+            .arc-hub img { width: 38px; height: 38px; }
+            .modal-grid { grid-template-columns: repeat(2, 1fr); }
+            .integrations-header h2 { font-size: 2rem; }
+            .integrations-modal { padding: 1.5rem; }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="assets/images/logo.png" alt="wakilz logo">
+                <span class="logo-text">wakilz</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#tech">Technologies</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+            <button class="cta-button"
+                onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                Get Started
+            </button>
+        </div>
+    </nav>
+
+        <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <div class="badge-reviews">★★★★★ Enterprise-Grade AI Agents</div>
+                <h1>Automated Sales Qualification & Pipeline Generation</h1>
+                <p>
+                    Stop leaking revenue from unqualified leads and delayed responses. We build conversational AI systems that engage, qualify, and route high-value B2B prospects directly to your sales team's calendar—24/7.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-split-left"
+                        onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                        Book Intro Call &rarr;
+                    </button>
+                    <a href="#case-studies" class="btn-split-right">See Case Studies &rarr;</a>
+                </div>
+            </div>
+            
+            <div class="chat-mockup-wrapper">
+                <div class="chat-mockup">
+                    <div class="chat-header">
+                        <div class="chat-avatar">AI</div>
+                        <div class="chat-title">
+                            <h4>Enterprise SDR Agent</h4>
+                            <p>Online • Responds instantly</p>
+                        </div>
+                    </div>
+                    <div class="chat-body" id="chatBody">
+                        <!-- Messages injected via JS -->
+                        <div class="typing-indicator" id="typingIndicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="chat-input">Type a message...</div>
+                        <button class="chat-send">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Enterprise Revenue Operations AI</h2>
+            <p>We build autonomous AI agents that handle the heavy lifting across your entire sales funnel—from top-of-funnel capture to fully qualified meetings.</p>
+        </div>
+
+        <div class="services-container">
+            <div class="service-card fade-in">
+                <span class="service-icon">💬</span>
+                <h3>Inbound Lead Capture</h3>
+                <p>Deploy intelligent agents that instantly engage high-intent visitors, preventing pipeline leakage outside of business hours.</p>
+                <ul class="service-features">
+                    <li>Omnichannel deployment (Web, WhatsApp)</li>
+                    <li>Dynamic intent recognition</li>
+                    <li>Seamless CRM synchronization</li>
+                    <li>Zero-latency response rates</li>
+                </ul>
+            </div>
+
+            <div class="service-card fade-in">
+                <span class="service-icon">🎯</span>
+                <h3>Automated Sales Qualification</h3>
+                <p>Implement sophisticated qualification matrices that filter out noise and route only enterprise-ready prospects to your Account Executives.</p>
+                <ul class="service-features">
+                    <li>BANT & MEDDIC qualification frameworks</li>
+                    <li>Contextual objection handling</li>
+                    <li>Firmographic data enrichment</li>
+                    <li>Conditional logic routing</li>
+                </ul>
+            </div>
+
+            <div class="service-card fade-in">
+                <span class="service-icon">🚀</span>
+                <h3>Full-Cycle Sales Automation</h3>
+                <p>End-to-end automation of the sales discovery process. Our LLM-powered agents conduct preliminary needs analysis before human handover.</p>
+                <ul class="service-features">
+                    <li>Conversational discovery flows</li>
+                    <li>Automated pipeline stage updates</li>
+                    <li>Drip campaign triggers</li>
+                    <li>Revenue attribution tracking</li>
+                </ul>
+            </div>
+
+            <div class="service-card fade-in">
+                <span class="service-icon">🎤</span>
+                <h3>Conversational Voice AI</h3>
+                <p>Deploy low-latency, human-like voice agents for inbound call deflection and outbound appointment setting at scale.</p>
+                <ul class="service-features">
+                    <li>Sub-500ms latency voice response</li>
+                    <li>Advanced semantic understanding</li>
+                    <li>Real-time sentiment analysis</li>
+                    <li>Telephony & VoIP integration</li>
+                </ul>
+            </div>
+
+            <div class="service-card fade-in">
+                <span class="service-icon">🛟</span>
+                <h3>Intelligent Support Resolution</h3>
+                <p>Deflect Level 1 & 2 support tickets with RAG-enabled agents trained securely on your company's proprietary knowledge base.</p>
+                <ul class="service-features">
+                    <li>Vector database RAG architecture</li>
+                    <li>Automated Jira/Zendesk ticketing</li>
+                    <li>Human-in-the-loop escalation</li>
+                    <li>Enterprise-grade data privacy</li>
+                </ul>
+            </div>
+
+            <div class="service-card fade-in">
+                <span class="service-icon">📅</span>
+                <h3>Frictionless Meeting Scheduling</h3>
+                <p>Eliminate back-and-forth emails with contextual scheduling agents that understand timezones, availability, and meeting priority.</p>
+                <ul class="service-features">
+                    <li>Direct G-Suite & Office365 sync</li>
+                    <li>Multi-stakeholder coordination</li>
+                    <li>Automated prep-material delivery</li>
+                    <li>No-show mitigation workflows</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="case-studies" id="case-studies">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <h2>Proven Enterprise Impact</h2>
+            <p>Explore how leading organizations leverage our conversational AI to accelerate revenue.</p>
+        </div>
+
+        <div class="case-studies-container">
+            <!-- Zahimo Studio -->
+            <div class="case-study fade-in">
+                <div class="case-study-text">
+                    <h3>Zahimo Studio</h3>
+                    <p>Built a lead generation and qualification chatbot for Zahimo Studio, a premium web design agency.
+                        The bot engages potential clients, qualifies their projects, and books free consultation calls
+                        automatically on their website.</p>
+                    <a href="https://www.zahimo.com/" target="_blank"
+                        style="color: var(--primary); font-weight: bold; text-decoration: none; margin-bottom: 2rem; display: inline-block;">Visit
+                        Zahimo Studio →</a>
+                </div>
+                <div class="case-study-metrics">
+                    <div class="metric">
+                        <div class="metric-value">45%</div>
+                        <div class="metric-label">Lead Increase</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3.2x</div>
+                        <div class="metric-label">Conversion Lift</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">24/7</div>
+                        <div class="metric-label">Engagement</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daava Group -->
+            <div class="case-study fade-in">
+                <div class="case-study-text">
+                    <h3>Daava Group</h3>
+                    <p>Developed an intelligent lead qualification bot for Daava Group, a 3D printing & modelling
+                        company. The bot qualifies project specifications, estimates timelines, handles client
+                        inquiries, and routes high-value opportunities directly to their sales team.</p>
+                    <a href="https://www.daavagroup.in/" target="_blank"
+                        style="color: var(--primary); font-weight: bold; text-decoration: none; margin-bottom: 2rem; display: inline-block;">Visit
+                        Daava Group →</a>
+                </div>
+                <div class="case-study-metrics">
+                    <div class="metric">
+                        <div class="metric-value">38%</div>
+                        <div class="metric-label">Lead Quality</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">60%</div>
+                        <div class="metric-label">Time Saved</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">5.0/5</div>
+                        <div class="metric-label">Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Section -->
+    <section class="integrations" id="tech">
+        <div class="integrations-container fade-in">
+            <div class="integration-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 7H7a5 5 0 0 0 0 10h10a5 5 0 0 0 0-10zm0 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                18 Native Integrations
+            </div>
+
+            <div class="integrations-header">
+                <h2>Works With Tools You Already Use</h2>
+                <p>Our agents plug directly into your existing stack — CRMs, messengers, calendars, and more — with zero-code setup.</p>
+            </div>
+
+            <!-- Arc Diagram -->
+            <div class="arc-diagram" id="arcDiagram">
+                <!-- SVG connector lines drawn by JS -->
+                <svg class="arc-svg" id="arcSvg"></svg>
+
+                <!-- Center Hub: wakilz AI -->
+                <div class="arc-hub" title="wakilz AI">
+                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+                        <rect width="46" height="46" rx="12" fill="#22c55e"/>
+                        <text x="23" y="30" text-anchor="middle" font-size="18" font-weight="800" fill="#000" font-family="Inter,sans-serif">W</text>
+                    </svg>
+                </div>
+
+                <!-- 9 arc icons -->
+                <div class="arc-icon arc-pos-1" title="Google Calendar"><img src="assets/icons/integrations/googlecalendar.svg" alt="Google Calendar"></div>
+                <div class="arc-icon arc-pos-2" title="Salesforce"><img src="assets/icons/integrations/salesforce.svg" alt="Salesforce"></div>
+                <div class="arc-icon arc-pos-3" title="HubSpot"><img src="assets/icons/integrations/hubspot.svg" alt="HubSpot"></div>
+                <div class="arc-icon arc-pos-4" title="Slack"><img src="assets/icons/integrations/slack.svg" alt="Slack"></div>
+                <div class="arc-icon arc-pos-5" title="Microsoft Teams"><img src="assets/icons/integrations/microsoftteams.svg" alt="Microsoft Teams"></div>
+                <div class="arc-icon arc-pos-6" title="Zapier"><img src="assets/icons/integrations/zapier.svg" alt="Zapier"></div>
+                <div class="arc-icon arc-pos-7" title="Stripe"><img src="assets/icons/integrations/stripe.svg" alt="Stripe"></div>
+                <div class="arc-icon arc-pos-8" title="Notion"><img src="assets/icons/integrations/notion.svg" alt="Notion"></div>
+                <div class="arc-icon arc-pos-9" title="WhatsApp"><img src="assets/icons/integrations/whatsapp.svg" alt="WhatsApp"></div>
+            </div>
+
+            <!-- CTA -->
+            <div class="arc-cta">
+                <p class="arc-cta-label">HubSpot · Salesforce · Slack · Zapier · Stripe · WhatsApp · Zendesk · Calendly · and more</p>
+                <button class="btn-view-integrations" id="openIntegrationsModal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    View All 18 Integrations
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Modal -->
+    <div class="integrations-modal-overlay" id="integrationsModalOverlay">
+        <div class="integrations-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <div>
+                    <h3 id="modalTitle">All Integrations</h3>
+                    <p>18 native connections — zero code required</p>
+                </div>
+                <button class="modal-close" id="closeIntegrationsModal" aria-label="Close">✕</button>
+            </div>
+            <div class="modal-grid">
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/hubspot.svg" alt="HubSpot"></div>
+                    <div class="modal-card-info"><h4>HubSpot</h4><p>CRM &amp; Marketing Hub</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/salesforce.svg" alt="Salesforce"></div>
+                    <div class="modal-card-info"><h4>Salesforce</h4><p>Enterprise CRM</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/slack.svg" alt="Slack"></div>
+                    <div class="modal-card-info"><h4>Slack</h4><p>Team Messaging</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/microsoftteams.svg" alt="Microsoft Teams"></div>
+                    <div class="modal-card-info"><h4>Microsoft Teams</h4><p>Business Communication</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/googlecalendar.svg" alt="Google Calendar"></div>
+                    <div class="modal-card-info"><h4>Google Calendar</h4><p>Scheduling &amp; Booking</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/zapier.svg" alt="Zapier"></div>
+                    <div class="modal-card-info"><h4>Zapier</h4><p>Workflow Automation</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/notion.svg" alt="Notion"></div>
+                    <div class="modal-card-info"><h4>Notion</h4><p>Knowledge Base &amp; Docs</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/stripe.svg" alt="Stripe"></div>
+                    <div class="modal-card-info"><h4>Stripe</h4><p>Payments &amp; Billing</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/whatsapp.svg" alt="WhatsApp"></div>
+                    <div class="modal-card-info"><h4>WhatsApp</h4><p>Messaging &amp; Outreach</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/twilio.svg" alt="Twilio"></div>
+                    <div class="modal-card-info"><h4>Twilio</h4><p>SMS &amp; Voice API</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/zendesk.svg" alt="Zendesk"></div>
+                    <div class="modal-card-info"><h4>Zendesk</h4><p>Customer Support</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/calendly.svg" alt="Calendly"></div>
+                    <div class="modal-card-info"><h4>Calendly</h4><p>Meeting Scheduling</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/mailchimp.svg" alt="Mailchimp"></div>
+                    <div class="modal-card-info"><h4>Mailchimp</h4><p>Email Marketing</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/activecampaign.svg" alt="ActiveCampaign"></div>
+                    <div class="modal-card-info"><h4>ActiveCampaign</h4><p>Marketing Automation</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/intercom.svg" alt="Intercom"></div>
+                    <div class="modal-card-info"><h4>Intercom</h4><p>Customer Messaging</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/pipedrive.svg" alt="Pipedrive"></div>
+                    <div class="modal-card-info"><h4>Pipedrive</h4><p>Sales Pipeline CRM</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/airtable.svg" alt="Airtable"></div>
+                    <div class="modal-card-info"><h4>Airtable</h4><p>Database &amp; Workflows</p></div>
+                </div>
+                <div class="modal-integration-card">
+                    <div class="modal-icon-wrap"><img src="assets/icons/integrations/make.svg" alt="Make"></div>
+                    <div class="modal-card-info"><h4>Make</h4><p>Advanced Automation</p></div>
+                </div>
+            </div>
+            <p class="modal-footer">All integrations are bi-directional and require zero code to set up.</p>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2>What Clients Say</h2>
+            <p>Join hundreds of satisfied clients who've transformed their business with conversational AI.</p>
+        </div>
+
+        <div class="testimonials-container">
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "wakilz's expertise in conversational AI is exceptional. The chatbot he built for us reduced our
+                    support tickets by 60% in the first month. Highly recommended!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SA</div>
+                    <div class="author-info">
+                        <h4>Sarah Anderson</h4>
+                        <p>Director, TechFlow Corp</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "The lead qualification bot increased our sales team's productivity immediately. We're closing more
+                    deals and spending less time on unqualified leads."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">DP</div>
+                    <div class="author-info">
+                        <h4>Dr. Priya Patel</h4>
+                        <p>CEO, HealthTech Solutions</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "The voice bot implementation was seamless. Our appointment no-shows dropped from 25% to 8%. The ROI
+                    was undeniable."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MK</div>
+                    <div class="author-info">
+                        <h4>Michael K.</h4>
+                        <p>Manager, Premier Services</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "Outstanding work! The customization and attention to detail were incredible. wakilz understood
+                    our unique needs perfectly."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JC</div>
+                    <div class="author-info">
+                        <h4>Jennifer Chen</h4>
+                        <p>Operations Lead, Global Retail</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "The professionalism and technical expertise demonstrated exceeded our expectations. Communication
+                    was clear throughout the entire project."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RJ</div>
+                    <div class="author-info">
+                        <h4>Robert Johnson</h4>
+                        <p>VP Sales, Enterprise Corp</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial fade-in">
+                <div class="stars">★★★★★</div>
+                <p>
+                    "Working with wakilz was a game-changer. The bot handles complex conversations that I thought
+                    would need human agents."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">EL</div>
+                    <div class="author-info">
+                        <h4>Emily López</h4>
+                        <p>Founder, E-commerce Hub</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <h2>Ready to Scale Your Revenue Operations?</h2>
+        <p>Let's discuss how conversational AI can automate your sales, support, and lead generation. Schedule a free
+            consultation today.</p>
+        <button class="cta-button" style="background: #000000 !important; color: #ffffff !important; padding: 1.2rem 2.5rem; font-size: 1.1rem; border-radius: 8px;"
+            onclick="window.open('mailto:contact@example.com?subject=AI Consultation Request')">
+            Book Strategy Discovery Call
+        </button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="#services">Lead Generation</a>
+                <a href="#services">Lead Qualification</a>
+                <a href="#services">Sales Automation</a>
+                <a href="#services">Voice Bots</a>
+                <a href="#services">Support Bots</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#">Case Studies</a>
+                <a href="#">Blog</a>
+                <a href="#">Documentation</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <p>📧 contact@example.com</p>
+                <p>💼 LinkedIn Profile</p>
+                <p>🐙 GitHub</p>
+                <p>🌐 Portfolio</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 wakilz. All rights reserved. | Building the future of conversational intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // =============================================
+        // Arc Diagram: draw dashed connector lines
+        // from each icon to the center hub
+        // =============================================
+        function drawArcLines() {
+            const diagram = document.getElementById('arcDiagram');
+            const svgEl   = document.getElementById('arcSvg');
+            if (!diagram || !svgEl) return;
+
+            svgEl.innerHTML = '';
+            const dRect = diagram.getBoundingClientRect();
+
+            // Center hub center point (relative to diagram)
+            const hub = diagram.querySelector('.arc-hub');
+            if (!hub) return;
+            const hRect = hub.getBoundingClientRect();
+            const cx = hRect.left + hRect.width  / 2 - dRect.left;
+            const cy = hRect.top  + hRect.height / 2 - dRect.top;
+
+            diagram.querySelectorAll('.arc-icon').forEach(icon => {
+                const iRect = icon.getBoundingClientRect();
+                const ix = iRect.left + iRect.width  / 2 - dRect.left;
+                const iy = iRect.top  + iRect.height / 2 - dRect.top;
+
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', cx);
+                line.setAttribute('y1', cy);
+                line.setAttribute('x2', ix);
+                line.setAttribute('y2', iy);
+                svgEl.appendChild(line);
+            });
+        }
+
+        window.addEventListener('load',   drawArcLines);
+        window.addEventListener('resize', drawArcLines);
+        setTimeout(drawArcLines, 300);
+
+        // =============================================
+        // Integrations Modal
+        // =============================================
+        const modalOverlay  = document.getElementById('integrationsModalOverlay');
+        const openModalBtn  = document.getElementById('openIntegrationsModal');
+        const closeModalBtn = document.getElementById('closeIntegrationsModal');
+
+        function openModal() {
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        if (openModalBtn)  openModalBtn.addEventListener('click', openModal);
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        if (modalOverlay)  modalOverlay.addEventListener('click', e => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const root = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        root.setAttribute('data-theme', savedTheme);
+        updateToggleButton(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleButton(newTheme);
+        });
+
+        function updateToggleButton(theme) {
+            themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+
+        // Chat Animation Logic
+        const chatMessages = [
+            { type: 'bot', text: "Hi there! I'm Wakilz's AI SDR. I noticed you're exploring conversational AI for revenue operations. How can I help?" },
+            { type: 'user', text: "Just looking around. Not sure if AI is right for us." },
+            { type: 'bot', text: "I completely understand. Many of our clients start there. What's your current biggest bottleneck in the sales process?" },
+            { type: 'user', text: "Our reps spend too much time chasing unqualified leads." },
+            { type: 'bot', text: "That's a classic revenue leak. On average, our AI agents recover 40% of lost SDR hours by qualifying inbound leads 24/7. What's your monthly inbound volume?" },
+            { type: 'user', text: "Around 2,000 leads/month." },
+            { type: 'bot', text: "At that volume, manual qualification is definitely inefficient. Are you currently using a CRM like Salesforce or HubSpot?" },
+            { type: 'user', text: "HubSpot. But integration is usually a nightmare." },
+            { type: 'bot', text: "Valid concern! We actually have native, bi-directional HubSpot integration. It logs custom properties and lead scores in real-time, zero code required." },
+            { type: 'user', text: "What about the chat quality? I don't want a robotic bot annoying our enterprise clients." },
+            { type: 'bot', text: "That's the difference between legacy chatbots and our LLM-powered agents. We use advanced RAG (Retrieval-Augmented Generation) so the bot sounds human, stays on-brand, and handles complex nuances." },
+            { type: 'user', text: "How long does implementation take?" },
+            { type: 'bot', text: "Typically under 2 weeks from kickoff to deployment. We handle the heavy lifting: prompt engineering, knowledge base ingestion, and testing." },
+            { type: 'user', text: "What kind of ROI can we expect?" },
+            { type: 'bot', text: "Clients with similar volume usually see a 3x increase in qualified meetings booked within the first 45 days. We also guarantee a 99.9% uptime SLA." },
+            { type: 'user', text: "Sounds promising. What's the pricing model?" },
+            { type: 'bot', text: "We offer performance-tied tiers or flat enterprise licensing depending on your needs. Let's get an expert to tailor a quote." },
+            { type: 'user', text: "Okay, I'm open to a quick chat." },
+            { type: 'bot', text: "Perfect. I've pulled up our Enterprise Specialist's calendar. Does Tuesday at 2 PM EST work for a 15-minute discovery call?" },
+            { type: 'user', text: "Yes, that works." },
+            { type: 'bot', text: "Meeting booked! The calendar invite is in your inbox. Looking forward to showing you the platform." }
+        ];
+
+        const chatBody = document.getElementById('chatBody');
+        const typingIndicator = document.getElementById('typingIndicator');
+        let currentMessageIndex = 0;
+
+        function addMessage(msg) {
+            const div = document.createElement('div');
+            div.className = `chat-message ${msg.type}`;
+            div.textContent = msg.text;
+            chatBody.insertBefore(div, typingIndicator);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function playChat() {
+            if (currentMessageIndex >= chatMessages.length) {
+                typingIndicator.style.display = 'none';
+                return;
+            }
+            
+            const msg = chatMessages[currentMessageIndex];
+            
+            if (msg.type === 'bot') {
+                typingIndicator.style.display = 'flex';
+                scrollToBottom();
+                
+                const typingDelay = Math.min(Math.max(msg.text.length * 20, 800), 2500);
+                
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    addMessage(msg);
+                    currentMessageIndex++;
+                    setTimeout(playChat, 1200); // Wait before user replies
+                }, typingDelay);
+            } else {
+                setTimeout(() => {
+                    addMessage(msg);
+                    currentMessageIndex++;
+                    setTimeout(playChat, 600); // Bot replies quickly
+                }, 1500);
+            }
+        }
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setTimeout(playChat, 1000);
+                heroObserver.disconnect();
+            }
+        });
+        
+        const mockup = document.querySelector('.chat-mockup');
+        if(mockup) heroObserver.observe(mockup);
+
+        // Update CTA button email
+        document.querySelector('.cta-section button').onclick = function () {
+            // Replace 'contact@example.com' with your actual email
+            window.location.href = 'mailto:your-email@example.com?subject=AI Consultation Request';
+        };
+    </script>
+    <script type="text/javascript">
+        (function (d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function () {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '69dba86fba56d42e7eb18220' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production',
+                    voice: {
+                        url: "https://runtime-api.voiceflow.com"
+                    }
+                }).then(() => {
+                    // This line triggers the automatic popup
+                    window.voiceflow.chat.open();
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+    </script>
+</body>
+
+</html>

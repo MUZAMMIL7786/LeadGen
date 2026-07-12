@@ -1,3 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+backend/.venv/
+backend/venv/
+
+# Python Distribution / packaging
+backend/build/
+backend/dist/
+backend/*.egg-info/
+*.egg
+pip-wheel-metadata/
+.installed.cfg
+
+# Python Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Python Type Checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
 # Node / npm
 node_modules/
 npm-debug.log*
@@ -28,6 +71,12 @@ desktop.ini
 *.user
 *.sln.docstates
 .editorconfig
+*.swp
+*.swo
+*~
+
+# GitHub
+.github/
 
 # Temp / dev scripts (keep scripts/ folder but ignore scratch)
 scripts/*.tmp
